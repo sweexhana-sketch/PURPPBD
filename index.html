@@ -47,8 +47,10 @@
 <body class="bg-gray-50 text-gray-800 relative">
 
   <!-- Header -->
-  <header class="bg-pupr-blue text-white fixed w-full z-[100] top-0 shadow-lg">
-    <div class="max-w-[1400px] mx-auto px-6 h-[90px] flex items-center justify-between">
+  <header class="text-white fixed w-full z-[100] top-0 shadow-lg" style="background-image: url('pbdpupr_11zon.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: fixed;">
+    <!-- Overlay gelap agar teks tetap terbaca -->
+    <div class="absolute inset-0 bg-pupr-blue/85 z-0"></div>
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 h-[90px] flex items-center justify-between">
       <!-- Logo -->
       <a href="#" onclick="window.scrollTo(0,0); return false;" class="flex items-center space-x-4 cursor-pointer">
         <img alt="Lambang Dinas PUPR Papua Barat Daya" class="h-[64px] w-auto drop-shadow-md" src="Logo_Papua_Barat_Daya.png">
