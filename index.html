@@ -47,10 +47,8 @@
 <body class="bg-gray-50 text-gray-800 relative">
 
   <!-- Header -->
-  <header class="text-white fixed w-full z-[100] top-0 shadow-lg" style="background-image: url('pbdpupr_11zon.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: fixed;">
-    <!-- Overlay gelap agar teks tetap terbaca -->
-    <div class="absolute inset-0 bg-pupr-blue/85 z-0"></div>
-    <div class="relative z-10 max-w-[1400px] mx-auto px-6 h-[90px] flex items-center justify-between">
+  <header class="bg-pupr-blue text-white fixed w-full z-[100] top-0 shadow-lg">
+    <div class="max-w-[1400px] mx-auto px-6 h-[90px] flex items-center justify-between">
       <!-- Logo -->
       <a href="#" onclick="window.scrollTo(0,0); return false;" class="flex items-center space-x-4 cursor-pointer">
         <img alt="Lambang Dinas PUPR Papua Barat Daya" class="h-[64px] w-auto drop-shadow-md" src="Logo_Papua_Barat_Daya.png">
@@ -210,9 +208,11 @@
   </div>
 
   <!-- Hero Section -->
-  <section class="relative pt-[90px] bg-pupr-blue flex flex-col md:flex-row min-h-[750px] overflow-hidden pb-32">
-    <div class="w-full md:w-[60%] flex items-center z-10 relative">
-      <div class="pl-6 md:pl-10 lg:pl-16 xl:pl-[calc((100vw-1400px)/2+1.5rem)] pr-6 pt-16 pb-24 w-full">
+  <section class="relative pt-[90px] flex min-h-[750px] overflow-hidden pb-32" style="background-image: url('pbdpupr_11zon.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <!-- Overlay gelap agar teks terbaca -->
+    <div class="absolute inset-0 bg-pupr-blue/75"></div>
+    <div class="w-full flex items-center z-10 relative">
+      <div class="pl-6 md:pl-10 lg:pl-16 xl:pl-[calc((100vw-1400px)/2+1.5rem)] pr-6 pt-16 pb-24 w-full max-w-3xl">
         <h2 class="text-4xl md:text-5xl lg:text-[64px] font-black leading-[1.05] text-white tracking-tight mb-8">
           MEMBANGUN<br>PAPUA BARAT DAYA<br>
           <span class="text-pupr-yellow">UNTUK<br>KONEKTIVITAS<br>DAN<br>KESEJAHTERAAN</span>
@@ -225,12 +225,8 @@
         </a>
       </div>
     </div>
-    
-    <!-- Hero Image Right -->
-    <div class="w-full md:w-[45%] absolute right-0 top-0 h-full md:relative md:block hidden">
-       <img alt="Hero Image" class="w-full h-full object-cover object-left" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh0Mwa5uIu-d6uL5KTeWIM_7W5hxEkivrv29XC_mb7Ai8vPQ5ymITZNTdk8reSA5JP5X8SLVO9LvTvl2tJfxIGm1SqrUM28GxefnaTJ6h0MMvAjs9MuwVGqeq4chXN56y9NbrYV1MEjGFzR1enH74hPUAw5zAPvhTryTO0gozDIZ9lRJQ3H3XW3bVhtYF6rc1BPu4rQB-9KFLhW3DUuJZcjRPv41_4XL1PeUaQ_lJKqiqOOIFjriw">
-    </div>
   </section>
+
 
   <!-- Services Cards Section -->
   <section id="layanan" class="max-w-[1400px] mx-auto px-6 -mt-[120px] relative z-20">
