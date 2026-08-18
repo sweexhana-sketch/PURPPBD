@@ -8,8 +8,25 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style data-purpose="custom-fonts">
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Inter', sans-serif;
+    }
+    .toast-enter-active {
+      animation: toast-in 0.3s ease-out forwards;
+    }
+    .toast-exit {
+      animation: toast-out 0.3s ease-in forwards;
+    }
+    @keyframes toast-in {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes toast-out {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(100%); opacity: 0; }
     }
   </style>
   <script>
@@ -27,44 +44,146 @@
     }
   </script>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50 text-gray-800 relative">
 
   <!-- Header -->
-  <header class="bg-pupr-blue text-white fixed w-full z-50 top-0 shadow-lg">
+  <header class="bg-pupr-blue text-white fixed w-full z-[100] top-0 shadow-lg">
     <div class="max-w-[1400px] mx-auto px-6 h-[90px] flex items-center justify-between">
       <!-- Logo -->
-      <div class="flex items-center space-x-4">
+      <a href="#" onclick="window.scrollTo(0,0); return false;" class="flex items-center space-x-4 cursor-pointer">
         <img alt="Logo PUPR" class="h-[52px] w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUeK4GTJj0SJ9sM6pe5uRstAONE85Em63uCZv4aORUDPhxOk4B9yuMOlcygKwlh-aNv8gvweN4p2PMZDLnWRaw0B67mQWGnb6cXYkV-wQQnOUIk6eeXeAQhCKy0SSYqgSBgNYbAN75EXp3doFClrr10WoeXF91V36jN2QKETgEnGvOIBiWgblQxCVIpLM-eczG190FRxJEKs3bokggVpY3z9N_l2dtm0Y-KAN5xsduupO6kc_tjUk">
         <div class="hidden sm:block">
           <h1 class="font-extrabold text-[15px] leading-tight uppercase tracking-wide">Dinas Pekerjaan Umum<br>Dan Perumahan Rakyat</h1>
           <p class="text-[11px] text-pupr-yellow font-bold tracking-widest uppercase mt-0.5">Provinsi Papua Barat Daya</p>
         </div>
-      </div>
+      </a>
       
       <!-- Nav -->
       <nav class="hidden lg:flex items-center space-x-7 text-[13px] font-bold tracking-wide">
-        <a class="text-pupr-yellow border-b-2 border-pupr-yellow py-2" href="#">BERANDA</a>
-        <a class="hover:text-pupr-yellow transition flex items-center py-2" href="#">PROFIL <i class="fas fa-chevron-down ml-1.5 text-[10px]"></i></a>
-        <a class="hover:text-pupr-yellow transition flex items-center py-2" href="#">LAYANAN <i class="fas fa-chevron-down ml-1.5 text-[10px]"></i></a>
-        <a class="hover:text-pupr-yellow transition flex items-center py-2" href="#">INFORMASI <i class="fas fa-chevron-down ml-1.5 text-[10px]"></i></a>
-        <a class="hover:text-pupr-yellow transition py-2" href="#">PPID</a>
-        <a class="hover:text-pupr-yellow transition py-2" href="#">GALERI</a>
-        <a class="hover:text-pupr-yellow transition py-2" href="#">KONTAK</a>
+        <a class="text-pupr-yellow border-b-2 border-pupr-yellow py-2 transition" href="#" onclick="window.scrollTo(0,0); return false;">BERANDA</a>
+        
+        <!-- Dropdown Profil -->
+        <div class="relative group">
+          <button class="hover:text-pupr-yellow transition flex items-center py-2 focus:outline-none">
+            PROFIL <i class="fas fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-200"></i>
+          </button>
+          <div class="absolute left-0 mt-0 w-48 bg-white rounded-b-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover:translate-y-0">
+            <div class="py-2 text-gray-700 font-medium border-t-2 border-pupr-yellow">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Sejarah</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Visi & Misi</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Struktur Organisasi</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dropdown Layanan -->
+        <div class="relative group">
+          <button class="hover:text-pupr-yellow transition flex items-center py-2 focus:outline-none">
+            LAYANAN <i class="fas fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-200"></i>
+          </button>
+          <div class="absolute left-0 mt-0 w-56 bg-white rounded-b-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover:translate-y-0">
+            <div class="py-2 text-gray-700 font-medium border-t-2 border-pupr-yellow">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Bina Marga</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Cipta Karya</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Sumber Daya Air</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dropdown Informasi -->
+        <div class="relative group">
+          <button class="hover:text-pupr-yellow transition flex items-center py-2 focus:outline-none">
+            INFORMASI <i class="fas fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-200"></i>
+          </button>
+          <div class="absolute left-0 mt-0 w-48 bg-white rounded-b-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover:translate-y-0">
+            <div class="py-2 text-gray-700 font-medium border-t-2 border-pupr-yellow">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Berita Terkini</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Pengumuman</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Agenda</a>
+            </div>
+          </div>
+        </div>
+
+        <a class="hover:text-pupr-yellow transition py-2 demo-link" href="#">PPID</a>
+        <a class="hover:text-pupr-yellow transition py-2 demo-link" href="#">GALERI</a>
+        <a class="hover:text-pupr-yellow transition py-2 demo-link" href="#">KONTAK</a>
       </nav>
 
       <!-- Actions -->
       <div class="hidden md:flex items-center space-x-6">
-        <button class="hover:text-pupr-yellow transition text-[17px]"><i class="fas fa-search"></i></button>
-        <button class="hover:text-pupr-yellow transition flex items-center text-sm font-bold"><i class="fas fa-globe mr-1.5 text-[17px]"></i> ID <i class="fas fa-chevron-down ml-1.5 text-[10px]"></i></button>
-        <a class="bg-pupr-yellow text-pupr-blue-dark px-7 py-2.5 rounded font-extrabold text-[13px] hover:bg-yellow-400 transition" href="#">E-LAYANAN</a>
+        <button id="search-btn" class="hover:text-pupr-yellow transition text-[17px] focus:outline-none"><i class="fas fa-search"></i></button>
+        
+        <!-- Language Select -->
+        <div class="relative group">
+          <button class="hover:text-pupr-yellow transition flex items-center text-sm font-bold py-2 focus:outline-none">
+            <i class="fas fa-globe mr-1.5 text-[17px]"></i> ID <i class="fas fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-200"></i>
+          </button>
+          <div class="absolute right-0 mt-0 w-32 bg-white rounded-b-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover:translate-y-0">
+            <div class="py-2 text-gray-700 font-medium text-[13px] border-t-2 border-pupr-yellow">
+              <a href="#" class="block px-4 py-2 bg-gray-50 text-pupr-blue font-bold demo-link">ID (Indonesia)</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">EN (English)</a>
+            </div>
+          </div>
+        </div>
+
+        <a class="bg-pupr-yellow text-pupr-blue-dark px-7 py-2.5 rounded font-extrabold text-[13px] hover:bg-yellow-400 shadow-[0_4px_14px_0_rgba(251,189,8,0.39)] hover:shadow-[0_6px_20px_rgba(251,189,8,0.23)] hover:-translate-y-0.5 transition-all duration-200 demo-link" href="#">E-LAYANAN</a>
       </div>
       
       <!-- Mobile menu button -->
-      <button class="lg:hidden text-white hover:text-pupr-yellow text-2xl">
+      <button id="mobile-menu-btn" class="lg:hidden text-white hover:text-pupr-yellow text-2xl focus:outline-none transition-colors">
         <i class="fas fa-bars"></i>
       </button>
     </div>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="absolute top-[90px] left-0 w-full bg-white shadow-xl transform -translate-y-full opacity-0 transition-all duration-300 z-40 pointer-events-none">
+      <div class="max-w-[1400px] mx-auto px-6 py-5 flex items-center relative">
+        <i class="fas fa-search text-gray-400 text-xl absolute left-10"></i>
+        <input type="text" placeholder="Cari informasi, berita, atau layanan..." class="w-full pl-12 pr-12 py-3 rounded-lg border border-gray-300 focus:border-pupr-blue focus:ring-1 focus:ring-pupr-blue text-gray-800 text-lg outline-none transition shadow-sm">
+        <button id="close-search-btn" class="absolute right-10 text-gray-400 hover:text-red-500 text-2xl transition focus:outline-none">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
   </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 bg-pupr-blue-dark/95 backdrop-blur-md z-[90] transform translate-x-full transition-transform duration-300 lg:hidden overflow-y-auto pt-[100px]">
+    <div class="px-8 pb-12 flex flex-col space-y-6">
+      <a href="#" class="text-pupr-yellow text-xl font-bold border-b border-gray-700/50 pb-4" onclick="document.getElementById('mobile-menu-btn').click(); window.scrollTo(0,0);">BERANDA</a>
+      
+      <div class="border-b border-gray-700/50 pb-4">
+        <p class="text-gray-400 text-[11px] font-bold mb-3 uppercase tracking-widest">Profil</p>
+        <div class="flex flex-col space-y-4 pl-2">
+          <a href="#" class="text-white hover:text-pupr-yellow text-lg transition demo-link">Sejarah</a>
+          <a href="#" class="text-white hover:text-pupr-yellow text-lg transition demo-link">Visi & Misi</a>
+          <a href="#" class="text-white hover:text-pupr-yellow text-lg transition demo-link">Struktur Organisasi</a>
+        </div>
+      </div>
+      
+      <div class="border-b border-gray-700/50 pb-4">
+        <p class="text-gray-400 text-[11px] font-bold mb-3 uppercase tracking-widest">Layanan</p>
+        <div class="flex flex-col space-y-4 pl-2">
+          <a href="#" class="text-white hover:text-pupr-yellow text-lg transition demo-link">Bina Marga</a>
+          <a href="#" class="text-white hover:text-pupr-yellow text-lg transition demo-link">Cipta Karya</a>
+          <a href="#" class="text-white hover:text-pupr-yellow text-lg transition demo-link">Sumber Daya Air</a>
+        </div>
+      </div>
+      
+      <a href="#" class="text-white hover:text-pupr-yellow text-xl font-bold border-b border-gray-700/50 pb-4 transition demo-link">INFORMASI</a>
+      <a href="#" class="text-white hover:text-pupr-yellow text-xl font-bold border-b border-gray-700/50 pb-4 transition demo-link">PPID</a>
+      <a href="#" class="text-white hover:text-pupr-yellow text-xl font-bold border-b border-gray-700/50 pb-4 transition demo-link">KONTAK</a>
+      
+      <div class="pt-4 flex items-center space-x-4">
+        <button class="text-white hover:text-pupr-yellow text-xl focus:outline-none transition demo-link"><i class="fas fa-search"></i></button>
+        <button class="text-white hover:text-pupr-yellow font-bold flex items-center focus:outline-none transition demo-link"><i class="fas fa-globe mr-2"></i> ID</button>
+      </div>
+
+      <div class="pt-6">
+        <a href="#" class="bg-pupr-yellow text-pupr-blue-dark block text-center py-4 rounded-lg font-extrabold text-lg shadow-lg hover:bg-yellow-400 transition demo-link">E-LAYANAN</a>
+      </div>
+    </div>
+  </div>
 
   <!-- Hero Section -->
   <section class="relative pt-[90px] bg-pupr-blue flex flex-col md:flex-row min-h-[750px] overflow-hidden pb-32">
@@ -77,7 +196,7 @@
         <p class="text-[17px] text-gray-200 mb-12 max-w-lg font-medium leading-[1.6]">
           Infrastruktur maju, permukiman layak, dan layanan publik yang berkualitas untuk masa depan Papua Barat Daya.
         </p>
-        <a class="inline-flex items-center bg-pupr-yellow text-pupr-blue-dark px-8 py-3.5 rounded font-extrabold text-[14px] hover:bg-yellow-400 transition" href="#">
+        <a class="inline-flex items-center bg-pupr-yellow text-pupr-blue-dark px-8 py-3.5 rounded font-extrabold text-[14px] hover:bg-yellow-400 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 demo-link" href="#">
           SELENGKAPNYA <i class="fas fa-arrow-right ml-2.5"></i>
         </a>
       </div>
@@ -93,52 +212,52 @@
   <section class="max-w-[1400px] mx-auto px-6 -mt-[120px] relative z-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Card 1 -->
-      <div class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 transition duration-300 min-h-[320px]">
+      <a href="#" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group demo-link">
         <div>
-          <div class="w-[60px] h-[60px] bg-pupr-blue rounded-full flex items-center justify-center text-white mb-6">
+          <div class="w-[60px] h-[60px] bg-pupr-blue rounded-full flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
             <i class="fas fa-road text-[22px]"></i>
           </div>
-          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide">INFRASTRUKTUR</h3>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">INFRASTRUKTUR</h3>
           <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Pembangunan jalan provinsi serta Rekomendasi Teknis (Rekomtek) Penggunaan Jalan untuk dispensasi kendaraan berat dan utilitas.</p>
         </div>
-        <a class="text-pupr-blue-dark font-extrabold text-[14px] hover:text-blue-700 flex items-center" href="#">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
-      </div>
+        <div class="text-pupr-blue-dark font-extrabold text-[14px] flex items-center group-hover:text-pupr-yellow-dark transition-colors">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i></div>
+      </a>
 
       <!-- Card 2 -->
-      <div class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 transition duration-300 min-h-[320px]">
+      <a href="#" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group demo-link">
         <div>
-          <div class="w-[60px] h-[60px] bg-pupr-yellow rounded-full flex items-center justify-center text-white mb-6">
+          <div class="w-[60px] h-[60px] bg-pupr-yellow rounded-full flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
             <i class="fas fa-home text-[22px]"></i>
           </div>
-          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide">PERUMAHAN & KAWASAN PERMUKIMAN</h3>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">PERUMAHAN & KAWASAN PERMUKIMAN</h3>
           <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Bantuan RTLH untuk kawasan kumuh skala provinsi (10-15 ha), daerah rawan bencana, atau kawasan strategis provinsi.</p>
         </div>
-        <a class="text-pupr-blue-dark font-extrabold text-[14px] hover:text-blue-700 flex items-center" href="#">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
-      </div>
+        <div class="text-pupr-blue-dark font-extrabold text-[14px] flex items-center group-hover:text-pupr-yellow-dark transition-colors">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i></div>
+      </a>
 
       <!-- Card 3 -->
-      <div class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 transition duration-300 min-h-[320px]">
+      <a href="#" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group demo-link">
         <div>
-          <div class="w-[60px] h-[60px] bg-pupr-blue rounded-full flex items-center justify-center text-white mb-6">
+          <div class="w-[60px] h-[60px] bg-pupr-blue rounded-full flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
             <i class="fas fa-water text-[22px]"></i>
           </div>
-          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide">SUMBER DAYA AIR</h3>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">SUMBER DAYA AIR</h3>
           <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Pengelolaan irigasi dan Rekomtek Pemanfaatan SDA untuk air permukaan pada sungai yang melintasi lintas kabupaten/kota.</p>
         </div>
-        <a class="text-pupr-blue-dark font-extrabold text-[14px] hover:text-blue-700 flex items-center" href="#">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
-      </div>
+        <div class="text-pupr-blue-dark font-extrabold text-[14px] flex items-center group-hover:text-pupr-yellow-dark transition-colors">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i></div>
+      </a>
 
       <!-- Card 4 -->
-      <div class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 transition duration-300 min-h-[320px]">
+      <a href="#" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group demo-link">
         <div>
-          <div class="w-[60px] h-[60px] bg-pupr-yellow rounded-full flex items-center justify-center text-white mb-6">
+          <div class="w-[60px] h-[60px] bg-pupr-yellow rounded-full flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
             <i class="fas fa-file-alt text-[22px]"></i>
           </div>
-          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide">LAYANAN & SERTIFIKASI</h3>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">LAYANAN & SERTIFIKASI</h3>
           <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Sertifikasi & Pelatihan Konstruksi bagi TKK untuk standar K4 dan pemberdayaan kontraktor/pekerja lokal.</p>
         </div>
-        <a class="text-pupr-blue-dark font-extrabold text-[14px] hover:text-blue-700 flex items-center" href="#">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
-      </div>
+        <div class="text-pupr-blue-dark font-extrabold text-[14px] flex items-center group-hover:text-pupr-yellow-dark transition-colors">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i></div>
+      </a>
     </div>
   </section>
 
@@ -158,36 +277,36 @@
 
       <div class="space-y-8">
         <!-- News Item 1 -->
-        <article class="flex flex-col md:flex-row gap-0 bg-white rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition duration-300">
-          <div class="md:w-[42%] relative min-h-[220px]">
-            <img alt="News Image" class="w-full h-full object-cover absolute inset-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_aCGr56Hd4VtrS_lmCN5HHJqcHH81BY-TRUqcy2DcOiB125ZnjIjq8Xk_5WORNTAwqijmzQignOvaLnIDDmkuJQOQbDqxg9eM328MoGYq0AUdGI9zilu-8awXbmz3r9uM97sFilA4oQ1hjYxeYOMDjylIt7-pOSZYIFAqwDv2DWy41XaYce5mJpYtEe8JSiD2Xfvsumi6-Y-qo2idaSuwnCtJSJEiNd-omdtQA04bqD6mKQkvhyM">
-            <span class="absolute bottom-4 left-4 bg-pupr-yellow text-pupr-blue-dark text-[11px] font-black px-3 py-1.5 uppercase tracking-wider rounded-sm">INFRASTRUKTUR</span>
+        <a href="#" class="flex flex-col md:flex-row gap-0 bg-white rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition duration-300 group demo-link">
+          <div class="md:w-[42%] relative min-h-[220px] overflow-hidden">
+            <img alt="News Image" class="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_aCGr56Hd4VtrS_lmCN5HHJqcHH81BY-TRUqcy2DcOiB125ZnjIjq8Xk_5WORNTAwqijmzQignOvaLnIDDmkuJQOQbDqxg9eM328MoGYq0AUdGI9zilu-8awXbmz3r9uM97sFilA4oQ1hjYxeYOMDjylIt7-pOSZYIFAqwDv2DWy41XaYce5mJpYtEe8JSiD2Xfvsumi6-Y-qo2idaSuwnCtJSJEiNd-omdtQA04bqD6mKQkvhyM">
+            <span class="absolute bottom-4 left-4 bg-pupr-yellow text-pupr-blue-dark text-[11px] font-black px-3 py-1.5 uppercase tracking-wider rounded-sm z-10">INFRASTRUKTUR</span>
           </div>
           <div class="md:w-[58%] p-8 flex flex-col justify-center">
             <div class="flex items-center text-gray-500 text-[13px] font-medium mb-3">
               <i class="far fa-calendar-alt mr-2 text-gray-400"></i> 20 Mei 2025
             </div>
-            <h3 class="text-[20px] font-black text-pupr-blue-dark mb-3 leading-snug">Peningkatan Jalan Strategis di Kabupaten Raja Ampat</h3>
+            <h3 class="text-[20px] font-black text-pupr-blue-dark mb-3 leading-snug group-hover:text-pupr-yellow-dark transition-colors">Peningkatan Jalan Strategis di Kabupaten Raja Ampat</h3>
             <p class="text-gray-500 text-[14px] mb-6 line-clamp-2 leading-relaxed">Dinas PUPR Papua Barat Daya terus berkomitmen meningkatkan konektivitas antar wilayah melalui pembangunan jalan yang berkualitas.</p>
-            <a class="text-pupr-blue-dark font-extrabold text-[13px] hover:text-blue-700 flex items-center mt-auto" href="#">Baca Selengkapnya <i class="fas fa-arrow-right ml-2 text-xs"></i></a>
+            <div class="text-pupr-blue-dark font-extrabold text-[13px] flex items-center mt-auto group-hover:text-pupr-yellow-dark transition-colors">Baca Selengkapnya <i class="fas fa-arrow-right ml-2 text-xs group-hover:translate-x-1 transition-transform"></i></div>
           </div>
-        </article>
+        </a>
 
         <!-- News Item 2 -->
-        <article class="flex flex-col md:flex-row gap-0 bg-white rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition duration-300">
-          <div class="md:w-[42%] relative min-h-[220px]">
-            <img alt="News Image" class="w-full h-full object-cover absolute inset-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV549Ce778BkDwuVJJeQ5PmKkzoBvC13c4nwKw9sasNDXkGTMIW1EDWPsOeIQM_StPpZaWZUXTScTdhjtsobV_Y7K8TdxRavoRqi24RtvW3VaRaPOpP45ZhBpZjBNl7KAKAlGCrzxJ-lUNt74RdoJku9l1katRA3YNIFSDRftVVh5jIWyTPSwA0C7lm9mgpc-v-y4pXFdSGQYDe45kX8UU7lDyxvhyU_RoDwLgkI1vjaT0hUZDb_I">
-            <span class="absolute bottom-4 left-4 bg-pupr-yellow text-pupr-blue-dark text-[11px] font-black px-3 py-1.5 uppercase tracking-wider rounded-sm">PERUMAHAN</span>
+        <a href="#" class="flex flex-col md:flex-row gap-0 bg-white rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition duration-300 group demo-link">
+          <div class="md:w-[42%] relative min-h-[220px] overflow-hidden">
+            <img alt="News Image" class="w-full h-full object-cover absolute inset-0 group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV549Ce778BkDwuVJJeQ5PmKkzoBvC13c4nwKw9sasNDXkGTMIW1EDWPsOeIQM_StPpZaWZUXTScTdhjtsobV_Y7K8TdxRavoRqi24RtvW3VaRaPOpP45ZhBpZjBNl7KAKAlGCrzxJ-lUNt74RdoJku9l1katRA3YNIFSDRftVVh5jIWyTPSwA0C7lm9mgpc-v-y4pXFdSGQYDe45kX8UU7lDyxvhyU_RoDwLgkI1vjaT0hUZDb_I">
+            <span class="absolute bottom-4 left-4 bg-pupr-yellow text-pupr-blue-dark text-[11px] font-black px-3 py-1.5 uppercase tracking-wider rounded-sm z-10">PERUMAHAN</span>
           </div>
           <div class="md:w-[58%] p-8 flex flex-col justify-center">
             <div class="flex items-center text-gray-500 text-[13px] font-medium mb-3">
               <i class="far fa-calendar-alt mr-2 text-gray-400"></i> 18 Mei 2025
             </div>
-            <h3 class="text-[20px] font-black text-pupr-blue-dark mb-3 leading-snug">Program Rumah Layak Huni untuk Masyarakat Papua</h3>
+            <h3 class="text-[20px] font-black text-pupr-blue-dark mb-3 leading-snug group-hover:text-pupr-yellow-dark transition-colors">Program Rumah Layak Huni untuk Masyarakat Papua</h3>
             <p class="text-gray-500 text-[14px] mb-6 line-clamp-2 leading-relaxed">Program bantuan perumahan untuk masyarakat berpenghasilan rendah terus berjalan di berbagai wilayah.</p>
-            <a class="text-pupr-blue-dark font-extrabold text-[13px] hover:text-blue-700 flex items-center mt-auto" href="#">Baca Selengkapnya <i class="fas fa-arrow-right ml-2 text-xs"></i></a>
+            <div class="text-pupr-blue-dark font-extrabold text-[13px] flex items-center mt-auto group-hover:text-pupr-yellow-dark transition-colors">Baca Selengkapnya <i class="fas fa-arrow-right ml-2 text-xs group-hover:translate-x-1 transition-transform"></i></div>
           </div>
-        </article>
+        </a>
       </div>
     </div>
 
@@ -201,51 +320,51 @@
         
         <ul class="space-y-1 relative z-10">
           <li>
-            <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group" href="#">
+            <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group demo-link" href="#">
               <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
                 <i class="fas fa-file-signature"></i>
               </div>
               <div class="flex-1">
-                <h4 class="font-bold text-[15px] mb-1">Pengajuan Permohonan</h4>
+                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">Pengajuan Permohonan</h4>
                 <p class="text-gray-400 text-[13px] leading-tight">Ajukan permohonan layanan PUPR</p>
               </div>
-              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow transition"></i>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
             </a>
           </li>
           <li class="border-t border-white/10">
-            <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group" href="#">
+            <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group demo-link" href="#">
               <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
                 <i class="fas fa-search-dollar"></i>
               </div>
               <div class="flex-1">
-                <h4 class="font-bold text-[15px] mb-1">Cek Progres Permohonan</h4>
+                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">Cek Progres Permohonan</h4>
                 <p class="text-gray-400 text-[13px] leading-tight">Pantau status permohonan Anda</p>
               </div>
-              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow transition"></i>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
             </a>
           </li>
           <li class="border-t border-white/10">
-            <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group" href="#">
+            <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group demo-link" href="#">
               <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
                 <i class="fas fa-comments"></i>
               </div>
               <div class="flex-1">
-                <h4 class="font-bold text-[15px] mb-1">Pengaduan Masyarakat</h4>
+                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">Pengaduan Masyarakat</h4>
                 <p class="text-gray-400 text-[13px] leading-tight">Sampaikan pengaduan dan aspirasi</p>
               </div>
-              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow transition"></i>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
             </a>
           </li>
           <li class="border-t border-white/10">
-             <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group" href="#">
+             <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group demo-link" href="#">
               <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
                 <i class="fas fa-water"></i>
               </div>
               <div class="flex-1">
-                <h4 class="font-bold text-[15px] mb-1">SPAM Lintas Kab/Kota</h4>
+                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">SPAM Lintas Kab/Kota</h4>
                 <p class="text-gray-400 text-[13px] leading-tight">Layanan sistem penyediaan air minum antar wilayah</p>
               </div>
-              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow transition"></i>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
             </a>
           </li>
         </ul>
@@ -254,31 +373,31 @@
   </main>
 
   <!-- Stats Banner -->
-  <section class="bg-pupr-blue-dark py-[60px] border-t border-white/5">
+  <section class="bg-pupr-blue-dark py-[60px] border-t border-white/5 relative z-10">
     <div class="max-w-[1400px] mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
-        <div class="flex items-center space-x-5 text-white">
+        <div class="flex items-center space-x-5 text-white hover:-translate-y-1 transition-transform">
           <div class="text-pupr-yellow text-[46px]"><i class="fas fa-hard-hat"></i></div>
           <div>
             <div class="text-[32px] font-black leading-none mb-1">120+</div>
             <div class="text-[13px] text-gray-400 font-semibold tracking-wide">Proyek Infrastruktur</div>
           </div>
         </div>
-        <div class="flex items-center space-x-5 text-white">
+        <div class="flex items-center space-x-5 text-white hover:-translate-y-1 transition-transform">
           <div class="text-pupr-yellow text-[46px]"><i class="fas fa-map-marker-alt"></i></div>
           <div>
             <div class="text-[32px] font-black leading-none mb-1">38</div>
             <div class="text-[13px] text-gray-400 font-semibold tracking-wide">Kabupaten / Kota</div>
           </div>
         </div>
-        <div class="flex items-center space-x-5 text-white">
+        <div class="flex items-center space-x-5 text-white hover:-translate-y-1 transition-transform">
           <div class="text-pupr-yellow text-[46px]"><i class="fas fa-users"></i></div>
           <div>
             <div class="text-[32px] font-black leading-none mb-1">500+</div>
             <div class="text-[13px] text-gray-400 font-semibold tracking-wide">Pegawai Profesional</div>
           </div>
         </div>
-        <div class="flex items-center space-x-5 text-white">
+        <div class="flex items-center space-x-5 text-white hover:-translate-y-1 transition-transform">
           <div class="text-pupr-yellow text-[46px]"><i class="fas fa-clock"></i></div>
           <div>
             <div class="text-[32px] font-black leading-none mb-1">24/7</div>
@@ -290,19 +409,114 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-pupr-blue text-white py-24 relative overflow-hidden">
+  <footer class="bg-pupr-blue text-white py-24 relative overflow-hidden z-10">
     <div class="max-w-[1400px] mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-16">
       <div class="max-w-xl w-full">
-        <div class="text-pupr-yellow text-[60px] leading-none font-serif mb-4"><i class="fas fa-quote-left"></i></div>
+        <div class="text-pupr-yellow text-[60px] leading-none font-serif mb-4 animate-pulse"><i class="fas fa-quote-left"></i></div>
         <h2 class="text-[40px] font-black leading-[1.15] tracking-tight">Membangun dengan hati,<br>mengabdi untuk negeri.</h2>
       </div>
       
-      <!-- Footer Right Image placeholder (from original screenshot) -->
+      <!-- Footer Right Image placeholder -->
       <div class="w-full lg:w-auto flex justify-end">
-         <img alt="Dashboard Screenshot" class="w-full max-w-[550px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-md object-cover border border-white/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSTGqnq7gLOJ6gGFSvKls40uRk0cICeD5kEw16T7yhmHjtEiA0yQ5ew8EgsmnmBm0XhWGgLpFr5uQ_4PXosvlFyh_abqOv-6G4xzD9oRaNQBkvZP1mYAxCFVQ_ZwSNiEfMRCGBMiCLp-5XHOJ7jsO-611GpVoo4j2mOsm7n_wA7fotXUuncSrzY3qUtQu6VoW9OnFdVaXzbo9188RKMaHSJoPGMPAF1Ln4btDvd4K9G5-QCMv4pfU">
+         <img alt="Dashboard Screenshot" class="w-full max-w-[550px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-md object-cover border border-white/10 hover:scale-105 transition-transform duration-500 cursor-pointer demo-link" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSTGqnq7gLOJ6gGFSvKls40uRk0cICeD5kEw16T7yhmHjtEiA0yQ5ew8EgsmnmBm0XhWGgLpFr5uQ_4PXosvlFyh_abqOv-6G4xzD9oRaNQBkvZP1mYAxCFVQ_ZwSNiEfMRCGBMiCLp-5XHOJ7jsO-611GpVoo4j2mOsm7n_wA7fotXUuncSrzY3qUtQu6VoW9OnFdVaXzbo9188RKMaHSJoPGMPAF1Ln4btDvd4K9G5-QCMv4pfU">
       </div>
     </div>
   </footer>
+
+  <!-- Interactivity Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuIcon = mobileMenuBtn.querySelector('i');
+
+      mobileMenuBtn.addEventListener('click', () => {
+        const isClosed = mobileMenu.classList.contains('translate-x-full');
+        if (isClosed) {
+          mobileMenu.classList.remove('translate-x-full');
+          mobileMenuIcon.classList.remove('fa-bars');
+          mobileMenuIcon.classList.add('fa-times');
+          document.body.style.overflow = 'hidden'; // Prevent scrolling
+        } else {
+          mobileMenu.classList.add('translate-x-full');
+          mobileMenuIcon.classList.remove('fa-times');
+          mobileMenuIcon.classList.add('fa-bars');
+          document.body.style.overflow = '';
+        }
+      });
+
+      // 2. Search Overlay Toggle
+      const searchBtn = document.getElementById('search-btn');
+      const closeSearchBtn = document.getElementById('close-search-btn');
+      const searchOverlay = document.getElementById('search-overlay');
+      const searchInput = searchOverlay.querySelector('input');
+
+      searchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchOverlay.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+        setTimeout(() => searchInput.focus(), 300);
+      });
+
+      closeSearchBtn.addEventListener('click', () => {
+        searchOverlay.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+      });
+
+      // Close search with Esc key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !searchOverlay.classList.contains('opacity-0')) {
+          closeSearchBtn.click();
+        }
+      });
+
+      // 3. Demo Links Toast Notification System
+      const demoLinks = document.querySelectorAll('.demo-link');
+      const toastContainer = document.createElement('div');
+      toastContainer.className = 'fixed bottom-6 right-6 z-[200] flex flex-col space-y-3 pointer-events-none';
+      document.body.appendChild(toastContainer);
+
+      let toastTimeout;
+
+      demoLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Close mobile menu if open
+          if (!mobileMenu.classList.contains('translate-x-full')) {
+             mobileMenuBtn.click();
+          }
+
+          showToast('Fitur ini sedang dalam tahap pengembangan tim kami.');
+        });
+      });
+
+      function showToast(message) {
+        // Create toast element
+        const toast = document.createElement('div');
+        toast.className = 'bg-pupr-blue-dark text-white px-6 py-4 rounded-lg shadow-2xl border-l-4 border-pupr-yellow flex items-center space-x-4 toast-enter-active pointer-events-auto';
+        toast.innerHTML = `
+          <i class="fas fa-info-circle text-pupr-yellow text-xl"></i>
+          <p class="font-medium text-[14px]">${message}</p>
+          <button class="ml-auto text-gray-400 hover:text-white transition focus:outline-none" onclick="this.parentElement.remove()">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        
+        toastContainer.appendChild(toast);
+
+        // Remove toast automatically after 3.5 seconds
+        setTimeout(() => {
+          if (toast.parentElement) {
+            toast.classList.remove('toast-enter-active');
+            toast.classList.add('toast-exit');
+            setTimeout(() => {
+              if (toast.parentElement) toast.remove();
+            }, 300); // Wait for exit animation
+          }
+        }, 3500);
+      }
+    });
+  </script>
 
 </body>
 </html>
