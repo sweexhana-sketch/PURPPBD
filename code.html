@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>PUPR Provinsi Papua Barat Daya</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'pupr-blue': '#102036',
+            'pupr-blue-dark': '#0b1626',
+            'pupr-yellow': '#fbbd08',
+            'pupr-yellow-dark': '#d97706',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-pupr-blue text-white fixed w-full z-50 top-0 shadow-lg">
+    <div class="max-w-[1400px] mx-auto px-6 h-[90px] flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-4">
+        <img alt="Logo PUPR" class="h-[52px] w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUeK4GTJj0SJ9sM6pe5uRstAONE85Em63uCZv4aORUDPhxOk4B9yuMOlcygKwlh-aNv8gvweN4p2PMZDLnWRaw0B67mQWGnb6cXYkV-wQQnOUIk6eeXeAQhCKy0SSYqgSBgNYbAN75EXp3doFClrr10WoeXF91V36jN2QKETgEnGvOIBiWgblQxCVIpLM-eczG190FRxJEKs3bokggVpY3z9N_l2dtm0Y-KAN5xsduupO6kc_tjUk">
+        <div class="hidden sm:block">
+          <h1 class="font-extrabold text-[15px] leading-tight uppercase tracking-wide">Dinas Pekerjaan Umum<br>Dan Perumahan Rakyat</h1>
+          <p class="text-[11px] text-pupr-yellow font-bold tracking-widest uppercase mt-0.5">Provinsi Papua Barat Daya</p>
+        </div>
+      </div>
+      
+      <!-- Nav -->
+      <nav class="hidden lg:flex items-center space-x-7 text-[13px] font-bold tracking-wide">
+        <a class="text-pupr-yellow border-b-2 border-pupr-yellow py-2" href="#">BERANDA</a>
+        <a class="hover:text-pupr-yellow transition flex items-center py-2" href="#">PROFIL <i class="fas fa-chevron-down ml-1.5 text-[10px]"></i></a>
+        <a class="hover:text-pupr-yellow transition flex items-center py-2" href="#">LAYANAN <i class="fas fa-chevron-down ml-1.5 text-[10px]"></i></a>
+        <a class="hover:text-pupr-yellow transition flex items-center py-2" href="#">INFORMASI <i class="fas fa-chevron-down ml-1.5 text-[10px]"></i></a>
+        <a class="hover:text-pupr-yellow transition py-2" href="#">PPID</a>
+        <a class="hover:text-pupr-yellow transition py-2" href="#">GALERI</a>
+        <a class="hover:text-pupr-yellow transition py-2" href="#">KONTAK</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="hidden md:flex items-center space-x-6">
+        <button class="hover:text-pupr-yellow transition text-[17px]"><i class="fas fa-search"></i></button>
+        <button class="hover:text-pupr-yellow transition flex items-center text-sm font-bold"><i class="fas fa-globe mr-1.5 text-[17px]"></i> ID <i class="fas fa-chevron-down ml-1.5 text-[10px]"></i></button>
+        <a class="bg-pupr-yellow text-pupr-blue-dark px-7 py-2.5 rounded font-extrabold text-[13px] hover:bg-yellow-400 transition" href="#">E-LAYANAN</a>
+      </div>
+      
+      <!-- Mobile menu button -->
+      <button class="lg:hidden text-white hover:text-pupr-yellow text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-[90px] bg-pupr-blue flex flex-col md:flex-row min-h-[750px] overflow-hidden pb-32">
+    <div class="w-full md:w-[60%] flex items-center z-10 relative">
+      <div class="pl-6 md:pl-10 lg:pl-16 xl:pl-[calc((100vw-1400px)/2+1.5rem)] pr-6 pt-16 pb-24 w-full">
+        <h2 class="text-4xl md:text-5xl lg:text-[64px] font-black leading-[1.05] text-white tracking-tight mb-8">
+          MEMBANGUN<br>PAPUA BARAT DAYA<br>
+          <span class="text-pupr-yellow">UNTUK<br>KONEKTIVITAS<br>DAN<br>KESEJAHTERAAN</span>
+        </h2>
+        <p class="text-[17px] text-gray-200 mb-12 max-w-lg font-medium leading-[1.6]">
+          Infrastruktur maju, permukiman layak, dan layanan publik yang berkualitas untuk masa depan Papua Barat Daya.
+        </p>
+        <a class="inline-flex items-center bg-pupr-yellow text-pupr-blue-dark px-8 py-3.5 rounded font-extrabold text-[14px] hover:bg-yellow-400 transition" href="#">
+          SELENGKAPNYA <i class="fas fa-arrow-right ml-2.5"></i>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Hero Image Right -->
+    <div class="w-full md:w-[45%] absolute right-0 top-0 h-full md:relative md:block hidden">
+       <img alt="Hero Image" class="w-full h-full object-cover object-left" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh0Mwa5uIu-d6uL5KTeWIM_7W5hxEkivrv29XC_mb7Ai8vPQ5ymITZNTdk8reSA5JP5X8SLVO9LvTvl2tJfxIGm1SqrUM28GxefnaTJ6h0MMvAjs9MuwVGqeq4chXN56y9NbrYV1MEjGFzR1enH74hPUAw5zAPvhTryTO0gozDIZ9lRJQ3H3XW3bVhtYF6rc1BPu4rQB-9KFLhW3DUuJZcjRPv41_4XL1PeUaQ_lJKqiqOOIFjriw">
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="max-w-[1400px] mx-auto px-6 -mt-[120px] relative z-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 transition duration-300 min-h-[320px]">
+        <div>
+          <div class="w-[60px] h-[60px] bg-pupr-blue rounded-full flex items-center justify-center text-white mb-6">
+            <i class="fas fa-road text-[22px]"></i>
+          </div>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide">INFRASTRUKTUR</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Pembangunan jalan provinsi serta Rekomendasi Teknis (Rekomtek) Penggunaan Jalan untuk dispensasi kendaraan berat dan utilitas.</p>
+        </div>
+        <a class="text-pupr-blue-dark font-extrabold text-[14px] hover:text-blue-700 flex items-center" href="#">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 transition duration-300 min-h-[320px]">
+        <div>
+          <div class="w-[60px] h-[60px] bg-pupr-yellow rounded-full flex items-center justify-center text-white mb-6">
+            <i class="fas fa-home text-[22px]"></i>
+          </div>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide">PERUMAHAN & KAWASAN PERMUKIMAN</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Bantuan RTLH untuk kawasan kumuh skala provinsi (10-15 ha), daerah rawan bencana, atau kawasan strategis provinsi.</p>
+        </div>
+        <a class="text-pupr-blue-dark font-extrabold text-[14px] hover:text-blue-700 flex items-center" href="#">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 transition duration-300 min-h-[320px]">
+        <div>
+          <div class="w-[60px] h-[60px] bg-pupr-blue rounded-full flex items-center justify-center text-white mb-6">
+            <i class="fas fa-water text-[22px]"></i>
+          </div>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide">SUMBER DAYA AIR</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Pengelolaan irigasi dan Rekomtek Pemanfaatan SDA untuk air permukaan pada sungai yang melintasi lintas kabupaten/kota.</p>
+        </div>
+        <a class="text-pupr-blue-dark font-extrabold text-[14px] hover:text-blue-700 flex items-center" href="#">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 transition duration-300 min-h-[320px]">
+        <div>
+          <div class="w-[60px] h-[60px] bg-pupr-yellow rounded-full flex items-center justify-center text-white mb-6">
+            <i class="fas fa-file-alt text-[22px]"></i>
+          </div>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide">LAYANAN & SERTIFIKASI</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Sertifikasi & Pelatihan Konstruksi bagi TKK untuk standar K4 dan pemberdayaan kontraktor/pekerja lokal.</p>
+        </div>
+        <a class="text-pupr-blue-dark font-extrabold text-[14px] hover:text-blue-700 flex items-center" href="#">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Area -->
+  <main class="max-w-[1400px] mx-auto px-6 py-[100px] grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12">
+    
+    <!-- Left Column: News -->
+    <div>
+      <div class="mb-10 relative">
+        <h2 class="text-[24px] font-black text-pupr-blue-dark uppercase tracking-wide">
+          BERITA TERKINI
+        </h2>
+        <div class="w-full h-0.5 bg-gray-200 mt-2 relative">
+           <div class="absolute top-0 left-0 h-1 -mt-[1px] w-[180px] bg-pupr-yellow"></div>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <!-- News Item 1 -->
+        <article class="flex flex-col md:flex-row gap-0 bg-white rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition duration-300">
+          <div class="md:w-[42%] relative min-h-[220px]">
+            <img alt="News Image" class="w-full h-full object-cover absolute inset-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_aCGr56Hd4VtrS_lmCN5HHJqcHH81BY-TRUqcy2DcOiB125ZnjIjq8Xk_5WORNTAwqijmzQignOvaLnIDDmkuJQOQbDqxg9eM328MoGYq0AUdGI9zilu-8awXbmz3r9uM97sFilA4oQ1hjYxeYOMDjylIt7-pOSZYIFAqwDv2DWy41XaYce5mJpYtEe8JSiD2Xfvsumi6-Y-qo2idaSuwnCtJSJEiNd-omdtQA04bqD6mKQkvhyM">
+            <span class="absolute bottom-4 left-4 bg-pupr-yellow text-pupr-blue-dark text-[11px] font-black px-3 py-1.5 uppercase tracking-wider rounded-sm">INFRASTRUKTUR</span>
+          </div>
+          <div class="md:w-[58%] p-8 flex flex-col justify-center">
+            <div class="flex items-center text-gray-500 text-[13px] font-medium mb-3">
+              <i class="far fa-calendar-alt mr-2 text-gray-400"></i> 20 Mei 2025
+            </div>
+            <h3 class="text-[20px] font-black text-pupr-blue-dark mb-3 leading-snug">Peningkatan Jalan Strategis di Kabupaten Raja Ampat</h3>
+            <p class="text-gray-500 text-[14px] mb-6 line-clamp-2 leading-relaxed">Dinas PUPR Papua Barat Daya terus berkomitmen meningkatkan konektivitas antar wilayah melalui pembangunan jalan yang berkualitas.</p>
+            <a class="text-pupr-blue-dark font-extrabold text-[13px] hover:text-blue-700 flex items-center mt-auto" href="#">Baca Selengkapnya <i class="fas fa-arrow-right ml-2 text-xs"></i></a>
+          </div>
+        </article>
+
+        <!-- News Item 2 -->
+        <article class="flex flex-col md:flex-row gap-0 bg-white rounded-xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition duration-300">
+          <div class="md:w-[42%] relative min-h-[220px]">
+            <img alt="News Image" class="w-full h-full object-cover absolute inset-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV549Ce778BkDwuVJJeQ5PmKkzoBvC13c4nwKw9sasNDXkGTMIW1EDWPsOeIQM_StPpZaWZUXTScTdhjtsobV_Y7K8TdxRavoRqi24RtvW3VaRaPOpP45ZhBpZjBNl7KAKAlGCrzxJ-lUNt74RdoJku9l1katRA3YNIFSDRftVVh5jIWyTPSwA0C7lm9mgpc-v-y4pXFdSGQYDe45kX8UU7lDyxvhyU_RoDwLgkI1vjaT0hUZDb_I">
+            <span class="absolute bottom-4 left-4 bg-pupr-yellow text-pupr-blue-dark text-[11px] font-black px-3 py-1.5 uppercase tracking-wider rounded-sm">PERUMAHAN</span>
+          </div>
+          <div class="md:w-[58%] p-8 flex flex-col justify-center">
+            <div class="flex items-center text-gray-500 text-[13px] font-medium mb-3">
+              <i class="far fa-calendar-alt mr-2 text-gray-400"></i> 18 Mei 2025
+            </div>
+            <h3 class="text-[20px] font-black text-pupr-blue-dark mb-3 leading-snug">Program Rumah Layak Huni untuk Masyarakat Papua</h3>
+            <p class="text-gray-500 text-[14px] mb-6 line-clamp-2 leading-relaxed">Program bantuan perumahan untuk masyarakat berpenghasilan rendah terus berjalan di berbagai wilayah.</p>
+            <a class="text-pupr-blue-dark font-extrabold text-[13px] hover:text-blue-700 flex items-center mt-auto" href="#">Baca Selengkapnya <i class="fas fa-arrow-right ml-2 text-xs"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Right Column: Online Services -->
+    <div>
+      <div class="bg-[#11243f] rounded-xl text-white p-8 relative overflow-hidden shadow-xl h-full">
+        <!-- Pattern Overlay -->
+        <div class="absolute inset-0 opacity-[0.08] pointer-events-none" style="background-image: radial-gradient(#FBBF24 2px, transparent 2px); background-size: 20px 20px;"></div>
+        
+        <h2 class="text-[18px] font-extrabold mb-8 text-pupr-yellow border-b border-white/10 pb-4 relative z-10 tracking-wide uppercase">LAYANAN ONLINE</h2>
+        
+        <ul class="space-y-1 relative z-10">
+          <li>
+            <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group" href="#">
+              <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
+                <i class="fas fa-file-signature"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-[15px] mb-1">Pengajuan Permohonan</h4>
+                <p class="text-gray-400 text-[13px] leading-tight">Ajukan permohonan layanan PUPR</p>
+              </div>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow transition"></i>
+            </a>
+          </li>
+          <li class="border-t border-white/10">
+            <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group" href="#">
+              <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
+                <i class="fas fa-search-dollar"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-[15px] mb-1">Cek Progres Permohonan</h4>
+                <p class="text-gray-400 text-[13px] leading-tight">Pantau status permohonan Anda</p>
+              </div>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow transition"></i>
+            </a>
+          </li>
+          <li class="border-t border-white/10">
+            <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group" href="#">
+              <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
+                <i class="fas fa-comments"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-[15px] mb-1">Pengaduan Masyarakat</h4>
+                <p class="text-gray-400 text-[13px] leading-tight">Sampaikan pengaduan dan aspirasi</p>
+              </div>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow transition"></i>
+            </a>
+          </li>
+          <li class="border-t border-white/10">
+             <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group" href="#">
+              <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
+                <i class="fas fa-water"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-[15px] mb-1">SPAM Lintas Kab/Kota</h4>
+                <p class="text-gray-400 text-[13px] leading-tight">Layanan sistem penyediaan air minum antar wilayah</p>
+              </div>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow transition"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Stats Banner -->
+  <section class="bg-pupr-blue-dark py-[60px] border-t border-white/5">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+        <div class="flex items-center space-x-5 text-white">
+          <div class="text-pupr-yellow text-[46px]"><i class="fas fa-hard-hat"></i></div>
+          <div>
+            <div class="text-[32px] font-black leading-none mb-1">120+</div>
+            <div class="text-[13px] text-gray-400 font-semibold tracking-wide">Proyek Infrastruktur</div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-5 text-white">
+          <div class="text-pupr-yellow text-[46px]"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <div class="text-[32px] font-black leading-none mb-1">38</div>
+            <div class="text-[13px] text-gray-400 font-semibold tracking-wide">Kabupaten / Kota</div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-5 text-white">
+          <div class="text-pupr-yellow text-[46px]"><i class="fas fa-users"></i></div>
+          <div>
+            <div class="text-[32px] font-black leading-none mb-1">500+</div>
+            <div class="text-[13px] text-gray-400 font-semibold tracking-wide">Pegawai Profesional</div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-5 text-white">
+          <div class="text-pupr-yellow text-[46px]"><i class="fas fa-clock"></i></div>
+          <div>
+            <div class="text-[32px] font-black leading-none mb-1">24/7</div>
+            <div class="text-[13px] text-gray-400 font-semibold tracking-wide">Layanan Online</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-pupr-blue text-white py-24 relative overflow-hidden">
+    <div class="max-w-[1400px] mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-16">
+      <div class="max-w-xl w-full">
+        <div class="text-pupr-yellow text-[60px] leading-none font-serif mb-4"><i class="fas fa-quote-left"></i></div>
+        <h2 class="text-[40px] font-black leading-[1.15] tracking-tight">Membangun dengan hati,<br>mengabdi untuk negeri.</h2>
+      </div>
+      
+      <!-- Footer Right Image placeholder (from original screenshot) -->
+      <div class="w-full lg:w-auto flex justify-end">
+         <img alt="Dashboard Screenshot" class="w-full max-w-[550px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-md object-cover border border-white/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSTGqnq7gLOJ6gGFSvKls40uRk0cICeD5kEw16T7yhmHjtEiA0yQ5ew8EgsmnmBm0XhWGgLpFr5uQ_4PXosvlFyh_abqOv-6G4xzD9oRaNQBkvZP1mYAxCFVQ_ZwSNiEfMRCGBMiCLp-5XHOJ7jsO-611GpVoo4j2mOsm7n_wA7fotXUuncSrzY3qUtQu6VoW9OnFdVaXzbo9188RKMaHSJoPGMPAF1Ln4btDvd4K9G5-QCMv4pfU">
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
