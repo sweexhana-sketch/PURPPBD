@@ -81,11 +81,24 @@
           <button class="hover:text-pupr-yellow transition flex items-center py-2 focus:outline-none">
             LAYANAN <i class="fas fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-200"></i>
           </button>
-          <div class="absolute left-0 mt-0 w-56 bg-white rounded-b-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover:translate-y-0">
+          <div class="absolute left-0 mt-0 w-72 bg-white rounded-b-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover:translate-y-0">
             <div class="py-2 text-gray-700 font-medium border-t-2 border-pupr-yellow">
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Bina Marga</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Cipta Karya</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Sumber Daya Air</a>
+              <a href="#layanan" onclick="openLayanan('perizinan')" class="flex items-center px-4 py-2.5 hover:bg-gray-50 hover:text-pupr-blue transition group/item">
+                <i class="fas fa-file-contract text-pupr-yellow mr-3 text-sm"></i>
+                <div><div class="font-semibold text-[13px]">Perizinan &amp; Rekomtek</div><div class="text-[11px] text-gray-400">Dispensasi jalan, SDA, KKPR</div></div>
+              </a>
+              <a href="#layanan" onclick="openLayanan('rtlh')" class="flex items-center px-4 py-2.5 hover:bg-gray-50 hover:text-pupr-blue transition group/item">
+                <i class="fas fa-home text-pupr-yellow mr-3 text-sm"></i>
+                <div><div class="font-semibold text-[13px]">Bantuan RTLH</div><div class="text-[11px] text-gray-400">Rumah Tidak Layak Huni</div></div>
+              </a>
+              <a href="#layanan" onclick="openLayanan('sertifikasi')" class="flex items-center px-4 py-2.5 hover:bg-gray-50 hover:text-pupr-blue transition group/item">
+                <i class="fas fa-hard-hat text-pupr-yellow mr-3 text-sm"></i>
+                <div><div class="font-semibold text-[13px]">Sertifikasi Konstruksi</div><div class="text-[11px] text-gray-400">Pelatihan &amp; sertifikasi TKK</div></div>
+              </a>
+              <a href="#layanan" onclick="openLayanan('spam')" class="flex items-center px-4 py-2.5 hover:bg-gray-50 hover:text-pupr-blue transition group/item">
+                <i class="fas fa-tint text-pupr-yellow mr-3 text-sm"></i>
+                <div><div class="font-semibold text-[13px]">Air Minum &amp; Sanitasi</div><div class="text-[11px] text-gray-400">SPAM komunal lintas kab/kota</div></div>
+              </a>
             </div>
           </div>
         </div>
@@ -163,10 +176,19 @@
       
       <div class="border-b border-gray-700/50 pb-4">
         <p class="text-gray-400 text-[11px] font-bold mb-3 uppercase tracking-widest">Layanan</p>
-        <div class="flex flex-col space-y-4 pl-2">
-          <a href="#" class="text-white hover:text-pupr-yellow text-lg transition demo-link">Bina Marga</a>
-          <a href="#" class="text-white hover:text-pupr-yellow text-lg transition demo-link">Cipta Karya</a>
-          <a href="#" class="text-white hover:text-pupr-yellow text-lg transition demo-link">Sumber Daya Air</a>
+        <div class="flex flex-col space-y-3 pl-2">
+          <a href="#layanan" onclick="openLayanan('perizinan'); document.getElementById('mobile-menu-btn').click();" class="flex items-center text-white hover:text-pupr-yellow text-[16px] transition">
+            <i class="fas fa-file-contract text-pupr-yellow mr-3 w-5"></i>Perizinan &amp; Rekomtek
+          </a>
+          <a href="#layanan" onclick="openLayanan('rtlh'); document.getElementById('mobile-menu-btn').click();" class="flex items-center text-white hover:text-pupr-yellow text-[16px] transition">
+            <i class="fas fa-home text-pupr-yellow mr-3 w-5"></i>Bantuan RTLH
+          </a>
+          <a href="#layanan" onclick="openLayanan('sertifikasi'); document.getElementById('mobile-menu-btn').click();" class="flex items-center text-white hover:text-pupr-yellow text-[16px] transition">
+            <i class="fas fa-hard-hat text-pupr-yellow mr-3 w-5"></i>Sertifikasi Konstruksi
+          </a>
+          <a href="#layanan" onclick="openLayanan('spam'); document.getElementById('mobile-menu-btn').click();" class="flex items-center text-white hover:text-pupr-yellow text-[16px] transition">
+            <i class="fas fa-tint text-pupr-yellow mr-3 w-5"></i>Air Minum &amp; Sanitasi
+          </a>
         </div>
       </div>
       
@@ -208,58 +230,373 @@
     </div>
   </section>
 
-  <!-- Services Section -->
-  <section class="max-w-[1400px] mx-auto px-6 -mt-[120px] relative z-20">
+  <!-- Services Cards Section -->
+  <section id="layanan" class="max-w-[1400px] mx-auto px-6 -mt-[120px] relative z-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Card 1 -->
-      <a href="#" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group demo-link">
+
+      <!-- Card 1: Perizinan & Rekomtek -->
+      <button onclick="openLayanan('perizinan')" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group text-left w-full">
         <div>
           <div class="w-[60px] h-[60px] bg-pupr-blue rounded-full flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-            <i class="fas fa-road text-[22px]"></i>
+            <i class="fas fa-file-contract text-[22px]"></i>
           </div>
-          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">INFRASTRUKTUR</h3>
-          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Pembangunan jalan provinsi serta Rekomendasi Teknis (Rekomtek) Penggunaan Jalan untuk dispensasi kendaraan berat dan utilitas.</p>
+          <span class="inline-block bg-blue-100 text-pupr-blue text-[10px] font-black px-2 py-1 rounded uppercase tracking-wider mb-3">Privat / Badan Usaha</span>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">PERIZINAN &amp; REKOMTEK</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Rekomtek Jalan Provinsi, Pemanfaatan SDA lintas kab/kota, dan Kesesuaian Kegiatan Pemanfaatan Ruang (KKPR).</p>
         </div>
         <div class="text-pupr-blue-dark font-extrabold text-[14px] flex items-center group-hover:text-pupr-yellow-dark transition-colors">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i></div>
-      </a>
+      </button>
 
-      <!-- Card 2 -->
-      <a href="#" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group demo-link">
+      <!-- Card 2: RTLH -->
+      <button onclick="openLayanan('rtlh')" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group text-left w-full">
         <div>
-          <div class="w-[60px] h-[60px] bg-pupr-yellow rounded-full flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+          <div class="w-[60px] h-[60px] bg-pupr-yellow rounded-full flex items-center justify-center text-pupr-blue-dark mb-6 group-hover:scale-110 transition-transform">
             <i class="fas fa-home text-[22px]"></i>
           </div>
-          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">PERUMAHAN & KAWASAN PERMUKIMAN</h3>
-          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Bantuan RTLH untuk kawasan kumuh skala provinsi (10-15 ha), daerah rawan bencana, atau kawasan strategis provinsi.</p>
+          <span class="inline-block bg-yellow-100 text-yellow-700 text-[10px] font-black px-2 py-1 rounded uppercase tracking-wider mb-3">Perorangan</span>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">BANTUAN RTLH</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Bantuan Rumah Tidak Layak Huni di kawasan kumuh skala provinsi (10–15 ha), daerah rawan bencana, atau kawasan strategis.</p>
         </div>
         <div class="text-pupr-blue-dark font-extrabold text-[14px] flex items-center group-hover:text-pupr-yellow-dark transition-colors">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i></div>
-      </a>
+      </button>
 
-      <!-- Card 3 -->
-      <a href="#" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group demo-link">
+      <!-- Card 3: Sertifikasi Konstruksi -->
+      <button onclick="openLayanan('sertifikasi')" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group text-left w-full">
         <div>
           <div class="w-[60px] h-[60px] bg-pupr-blue rounded-full flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-            <i class="fas fa-water text-[22px]"></i>
+            <i class="fas fa-hard-hat text-[22px]"></i>
           </div>
-          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">SUMBER DAYA AIR</h3>
-          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Pengelolaan irigasi dan Rekomtek Pemanfaatan SDA untuk air permukaan pada sungai yang melintasi lintas kabupaten/kota.</p>
+          <span class="inline-block bg-blue-100 text-pupr-blue text-[10px] font-black px-2 py-1 rounded uppercase tracking-wider mb-3">Pekerja / Tukang</span>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">SERTIFIKASI KONSTRUKSI</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Pelatihan dan fasilitasi sertifikasi Tenaga Kerja Konstruksi (TKK) untuk standar K4 dan pemberdayaan kontraktor lokal.</p>
         </div>
         <div class="text-pupr-blue-dark font-extrabold text-[14px] flex items-center group-hover:text-pupr-yellow-dark transition-colors">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i></div>
-      </a>
+      </button>
 
-      <!-- Card 4 -->
-      <a href="#" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group demo-link">
+      <!-- Card 4: Air Minum & Sanitasi -->
+      <button onclick="openLayanan('spam')" class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-8 flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 min-h-[320px] group text-left w-full">
         <div>
-          <div class="w-[60px] h-[60px] bg-pupr-yellow rounded-full flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-            <i class="fas fa-file-alt text-[22px]"></i>
+          <div class="w-[60px] h-[60px] bg-pupr-yellow rounded-full flex items-center justify-center text-pupr-blue-dark mb-6 group-hover:scale-110 transition-transform">
+            <i class="fas fa-tint text-[22px]"></i>
           </div>
-          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">LAYANAN & SERTIFIKASI</h3>
-          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">Sertifikasi & Pelatihan Konstruksi bagi TKK untuk standar K4 dan pemberdayaan kontraktor/pekerja lokal.</p>
+          <span class="inline-block bg-yellow-100 text-yellow-700 text-[10px] font-black px-2 py-1 rounded uppercase tracking-wider mb-3">Kelompok Masyarakat</span>
+          <h3 class="font-extrabold text-[17px] mb-3 text-pupr-blue-dark tracking-wide group-hover:text-pupr-yellow-dark transition-colors">AIR MINUM &amp; SANITASI</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed mb-6">SPAM komunal lintas kabupaten/kota dan sanitasi berbasis masyarakat di kawasan strategis provinsi.</p>
         </div>
         <div class="text-pupr-blue-dark font-extrabold text-[14px] flex items-center group-hover:text-pupr-yellow-dark transition-colors">Selengkapnya <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i></div>
-      </a>
+      </button>
+
     </div>
   </section>
+
+  <!-- Layanan Detail Section -->
+  <section class="max-w-[1400px] mx-auto px-6 py-20">
+    <div class="text-center mb-12">
+      <p class="text-pupr-yellow font-bold text-[13px] uppercase tracking-[4px] mb-3">Kewenangan Provinsi Papua Barat Daya</p>
+      <h2 class="text-[32px] md:text-[40px] font-black text-pupr-blue-dark leading-tight">Layanan Publik <span class="text-pupr-blue">Langsung ke Masyarakat</span></h2>
+      <p class="text-gray-500 mt-4 max-w-2xl mx-auto text-[15px] leading-relaxed">Layanan yang sah menjadi kewenangan Provinsi Papua Barat Daya dan dapat diakses langsung oleh masyarakat, pelaku usaha, maupun tenaga kerja.</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10" id="layanan-tabs">
+      <button onclick="switchTab('perizinan')" data-tab="perizinan" class="tab-btn active-tab px-5 py-2.5 rounded-full font-bold text-[13px] border-2 border-pupr-blue bg-pupr-blue text-white transition-all">
+        <i class="fas fa-file-contract mr-2"></i>Perizinan &amp; Rekomtek
+      </button>
+      <button onclick="switchTab('rtlh')" data-tab="rtlh" class="tab-btn px-5 py-2.5 rounded-full font-bold text-[13px] border-2 border-gray-300 text-gray-600 hover:border-pupr-blue hover:text-pupr-blue transition-all">
+        <i class="fas fa-home mr-2"></i>Bantuan RTLH
+      </button>
+      <button onclick="switchTab('sertifikasi')" data-tab="sertifikasi" class="tab-btn px-5 py-2.5 rounded-full font-bold text-[13px] border-2 border-gray-300 text-gray-600 hover:border-pupr-blue hover:text-pupr-blue transition-all">
+        <i class="fas fa-hard-hat mr-2"></i>Sertifikasi Konstruksi
+      </button>
+      <button onclick="switchTab('spam')" data-tab="spam" class="tab-btn px-5 py-2.5 rounded-full font-bold text-[13px] border-2 border-gray-300 text-gray-600 hover:border-pupr-blue hover:text-pupr-blue transition-all">
+        <i class="fas fa-tint mr-2"></i>Air Minum &amp; Sanitasi
+      </button>
+    </div>
+
+    <!-- Tab Contents -->
+
+    <!-- Tab 1: Perizinan & Rekomtek -->
+    <div id="tab-perizinan" class="tab-content">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Info Panel -->
+        <div class="bg-gradient-to-br from-pupr-blue to-blue-700 rounded-2xl p-8 text-white relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-16 translate-x-16"></div>
+          <div class="absolute bottom-0 left-0 w-28 h-28 bg-pupr-yellow/10 rounded-full translate-y-10 -translate-x-8"></div>
+          <div class="relative z-10">
+            <div class="w-14 h-14 bg-pupr-yellow/20 rounded-xl flex items-center justify-center mb-6">
+              <i class="fas fa-file-contract text-pupr-yellow text-2xl"></i>
+            </div>
+            <span class="bg-pupr-yellow/20 text-pupr-yellow text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Privat / Badan Usaha</span>
+            <h3 class="text-[26px] font-black mt-4 mb-3 leading-tight">Layanan Perizinan &amp; Rekomendasi Teknis</h3>
+            <p class="text-blue-100 text-[14px] leading-relaxed">Surat izin atau rekomendasi teknis diberikan langsung kepada pelaku usaha/perorangan dengan syarat objeknya merupakan aset/kewenangan provinsi.</p>
+          </div>
+        </div>
+        <!-- Sub-layanan -->
+        <div class="space-y-4">
+          <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md transition group">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-pupr-blue transition">
+                <i class="fas fa-truck-moving text-pupr-blue group-hover:text-white transition text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-pupr-blue-dark text-[15px] mb-1">Rekomtek Penggunaan Jalan Provinsi</h4>
+                <p class="text-gray-500 text-[13px] leading-relaxed">Untuk kendaraan berat melebihi muatan standar (dispensasi jalan) atau pemasangan utilitas (kabel/pipa) di Ruang Milik Jalan Provinsi.</p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <span class="bg-gray-100 text-gray-600 text-[11px] px-2 py-1 rounded font-medium">Dispensasi Tonase</span>
+                  <span class="bg-gray-100 text-gray-600 text-[11px] px-2 py-1 rounded font-medium">Galian Utilitas</span>
+                  <span class="bg-gray-100 text-gray-600 text-[11px] px-2 py-1 rounded font-medium">Pemasangan Billboard</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md transition group">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-pupr-blue transition">
+                <i class="fas fa-water text-pupr-blue group-hover:text-white transition text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-pupr-blue-dark text-[15px] mb-1">Rekomtek Pemanfaatan SDA</h4>
+                <p class="text-gray-500 text-[13px] leading-relaxed">Pemanfaatan air permukaan dari sungai lintas kabupaten/kota yang masuk Wilayah Sungai kewenangan Provinsi Papua Barat Daya.</p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <span class="bg-gray-100 text-gray-600 text-[11px] px-2 py-1 rounded font-medium">Irigasi Pertanian</span>
+                  <span class="bg-gray-100 text-gray-600 text-[11px] px-2 py-1 rounded font-medium">Air Industri</span>
+                  <span class="bg-gray-100 text-gray-600 text-[11px] px-2 py-1 rounded font-medium">PLTA Mikro</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md transition group">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-pupr-blue transition">
+                <i class="fas fa-map-marked-alt text-pupr-blue group-hover:text-white transition text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-pupr-blue-dark text-[15px] mb-1">KKPR — Kesesuaian Kegiatan Pemanfaatan Ruang</h4>
+                <p class="text-gray-500 text-[13px] leading-relaxed">Untuk investor/pemohon yang lokasi usahanya berada di area lintas kabupaten/kota atau kawasan strategis provinsi.</p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <span class="bg-gray-100 text-gray-600 text-[11px] px-2 py-1 rounded font-medium">Kawasan Strategis Provinsi</span>
+                  <span class="bg-gray-100 text-gray-600 text-[11px] px-2 py-1 rounded font-medium">Lintas Kab/Kota</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button onclick="openModal('perizinan')" class="w-full bg-pupr-blue text-white py-3.5 rounded-xl font-bold hover:bg-blue-800 transition flex items-center justify-center gap-2">
+            <i class="fas fa-paper-plane"></i> Ajukan Permohonan
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: RTLH -->
+    <div id="tab-rtlh" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl p-8 text-white relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-16 translate-x-16"></div>
+          <div class="relative z-10">
+            <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-6">
+              <i class="fas fa-home text-white text-2xl"></i>
+            </div>
+            <span class="bg-white/20 text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Perorangan</span>
+            <h3 class="text-[26px] font-black mt-4 mb-3 leading-tight">Bantuan Rumah Tidak Layak Huni (RTLH)</h3>
+            <p class="text-yellow-50 text-[14px] leading-relaxed">Masyarakat perorangan bisa menerima bantuan langsung dari Pemprov Papua Barat Daya berdasarkan skala prioritas dan kriteria kawasan.</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="bg-green-50 border border-green-200 rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <i class="fas fa-check-circle text-green-600 text-xl"></i>
+              <h4 class="font-bold text-green-800 text-[15px]">Kriteria Kewenangan Provinsi</h4>
+            </div>
+            <ul class="space-y-2 text-[13px] text-green-700">
+              <li class="flex items-start gap-2"><i class="fas fa-circle text-[6px] mt-2 shrink-0"></i>Kawasan permukiman kumuh skala provinsi: luas <span class="font-bold">10 ha hingga &lt; 15 ha</span></li>
+              <li class="flex items-start gap-2"><i class="fas fa-circle text-[6px] mt-2 shrink-0"></i>Berlokasi di <span class="font-bold">kawasan rawan bencana daerah</span></li>
+              <li class="flex items-start gap-2"><i class="fas fa-circle text-[6px] mt-2 shrink-0"></i>Berada di <span class="font-bold">kawasan prioritas strategis provinsi</span></li>
+            </ul>
+          </div>
+          <div class="bg-red-50 border border-red-200 rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <i class="fas fa-info-circle text-red-500 text-xl"></i>
+              <h4 class="font-bold text-red-700 text-[15px]">Kewenangan Kabupaten/Kota</h4>
+            </div>
+            <ul class="space-y-2 text-[13px] text-red-600">
+              <li class="flex items-start gap-2"><i class="fas fa-circle text-[6px] mt-2 shrink-0"></i>RTLH di luar kawasan strategis provinsi</li>
+              <li class="flex items-start gap-2"><i class="fas fa-circle text-[6px] mt-2 shrink-0"></i>Kawasan kumuh dengan luas <span class="font-bold">&lt; 10 ha</span></li>
+            </ul>
+          </div>
+          <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+            <h4 class="font-bold text-pupr-blue-dark text-[14px] mb-3"><i class="fas fa-list-check mr-2 text-pupr-yellow"></i>Persyaratan Pengajuan</h4>
+            <ul class="space-y-1.5 text-[13px] text-gray-600">
+              <li class="flex items-center gap-2"><i class="fas fa-file-alt text-gray-400 w-4"></i>Fotokopi KTP dan KK</li>
+              <li class="flex items-center gap-2"><i class="fas fa-file-alt text-gray-400 w-4"></i>Surat keterangan tidak mampu dari Kelurahan</li>
+              <li class="flex items-center gap-2"><i class="fas fa-image text-gray-400 w-4"></i>Foto kondisi rumah (tampak luar &amp; dalam)</li>
+              <li class="flex items-center gap-2"><i class="fas fa-file-alt text-gray-400 w-4"></i>Bukti kepemilikan tanah / surat keterangan tanah</li>
+              <li class="flex items-center gap-2"><i class="fas fa-map text-gray-400 w-4"></i>Koordinat lokasi rumah (GPS)</li>
+            </ul>
+          </div>
+          <button onclick="openModal('rtlh')" class="w-full bg-amber-500 text-white py-3.5 rounded-xl font-bold hover:bg-amber-600 transition flex items-center justify-center gap-2">
+            <i class="fas fa-paper-plane"></i> Daftar Bantuan RTLH
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Sertifikasi Konstruksi -->
+    <div id="tab-sertifikasi" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bg-gradient-to-br from-slate-700 to-pupr-blue-dark rounded-2xl p-8 text-white relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-16 translate-x-16"></div>
+          <div class="relative z-10">
+            <div class="w-14 h-14 bg-pupr-yellow/20 rounded-xl flex items-center justify-center mb-6">
+              <i class="fas fa-hard-hat text-pupr-yellow text-2xl"></i>
+            </div>
+            <span class="bg-pupr-yellow/20 text-pupr-yellow text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Pekerja / Tukang / Mandor</span>
+            <h3 class="text-[26px] font-black mt-4 mb-3 leading-tight">Sertifikasi &amp; Pelatihan Konstruksi</h3>
+            <p class="text-gray-300 text-[14px] leading-relaxed">Tenaga kerja konstruksi perorangan mendapatkan pelatihan dan sertifikasi langsung dari dinas provinsi untuk tingkat terampil dan ahli.</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm text-center">
+              <div class="text-3xl font-black text-pupr-blue mb-1">K4</div>
+              <div class="text-[12px] text-gray-500 font-medium">Keamanan, Keselamatan,<br>Kesehatan &amp; Keberlanjutan</div>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm text-center">
+              <div class="text-3xl font-black text-pupr-blue mb-1">SKT</div>
+              <div class="text-[12px] text-gray-500 font-medium">Sertifikat Keterampilan<br>Tenaga Konstruksi</div>
+            </div>
+          </div>
+          <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+            <h4 class="font-bold text-pupr-blue-dark text-[14px] mb-3"><i class="fas fa-graduation-cap mr-2 text-pupr-yellow"></i>Program Pelatihan Tersedia</h4>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between py-2 border-b border-gray-50">
+                <span class="text-[13px] text-gray-700 flex items-center gap-2"><i class="fas fa-wrench text-gray-400 w-4"></i>Tukang Batu / Bata</span>
+                <span class="text-[11px] bg-green-100 text-green-700 px-2 py-0.5 rounded font-bold">Buka</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-50">
+                <span class="text-[13px] text-gray-700 flex items-center gap-2"><i class="fas fa-hammer text-gray-400 w-4"></i>Tukang Kayu / Finishing</span>
+                <span class="text-[11px] bg-green-100 text-green-700 px-2 py-0.5 rounded font-bold">Buka</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-50">
+                <span class="text-[13px] text-gray-700 flex items-center gap-2"><i class="fas fa-bolt text-gray-400 w-4"></i>Teknisi Mekanikal &amp; Elektrikal</span>
+                <span class="text-[11px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded font-bold">Segera</span>
+              </div>
+              <div class="flex items-center justify-between py-2">
+                <span class="text-[13px] text-gray-700 flex items-center gap-2"><i class="fas fa-tasks text-gray-400 w-4"></i>Mandor / Pengawas Lapangan</span>
+                <span class="text-[11px] bg-green-100 text-green-700 px-2 py-0.5 rounded font-bold">Buka</span>
+              </div>
+            </div>
+          </div>
+          <button onclick="openModal('sertifikasi')" class="w-full bg-slate-700 text-white py-3.5 rounded-xl font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2">
+            <i class="fas fa-paper-plane"></i> Daftar Pelatihan / Sertifikasi
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Air Minum & Sanitasi -->
+    <div id="tab-spam" class="tab-content hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bg-gradient-to-br from-cyan-600 to-blue-700 rounded-2xl p-8 text-white relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-16 translate-x-16"></div>
+          <div class="relative z-10">
+            <div class="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-6">
+              <i class="fas fa-tint text-white text-2xl"></i>
+            </div>
+            <span class="bg-white/20 text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Kelompok Masyarakat</span>
+            <h3 class="text-[26px] font-black mt-4 mb-3 leading-tight">Air Minum &amp; Sanitasi Komunal</h3>
+            <p class="text-cyan-100 text-[14px] leading-relaxed">Penyediaan Air Minum dan Sanitasi berbasis masyarakat (SPAM/Sanitasi Komunal) lintas kabupaten/kota atau kawasan strategis provinsi.</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="bg-cyan-50 border border-cyan-200 rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <i class="fas fa-check-circle text-cyan-600 text-xl"></i>
+              <h4 class="font-bold text-cyan-800 text-[15px]">Syarat Kewenangan Provinsi</h4>
+            </div>
+            <ul class="space-y-2 text-[13px] text-cyan-700">
+              <li class="flex items-start gap-2"><i class="fas fa-circle text-[6px] mt-2 shrink-0"></i>SPAM bersifat <span class="font-bold">lintas kabupaten/kota</span> (contoh: sumber air dari Kab. Sorong dialirkan ke Kota Sorong)</li>
+              <li class="flex items-start gap-2"><i class="fas fa-circle text-[6px] mt-2 shrink-0"></i>Berada di <span class="font-bold">kawasan strategis provinsi</span> yang ditetapkan</li>
+            </ul>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+              <div class="flex items-center gap-2 mb-2">
+                <i class="fas fa-pipe text-cyan-600"></i>
+                <h5 class="font-bold text-[13px] text-pupr-blue-dark">SPAM Komunal</h5>
+              </div>
+              <p class="text-[12px] text-gray-500">Jaringan air bersih untuk kelompok pengelola masyarakat (KPM) di daerah terpencil lintas wilayah.</p>
+            </div>
+            <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+              <div class="flex items-center gap-2 mb-2">
+                <i class="fas fa-recycle text-green-600"></i>
+                <h5 class="font-bold text-[13px] text-pupr-blue-dark">Sanitasi Komunal</h5>
+              </div>
+              <p class="text-[12px] text-gray-500">Sarana MCK dan pengolahan limbah komunal untuk kawasan permukiman yang belum terlayani.</p>
+            </div>
+          </div>
+          <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+            <h4 class="font-bold text-pupr-blue-dark text-[14px] mb-3"><i class="fas fa-list-check mr-2 text-cyan-500"></i>Persyaratan Kelompok Pemohon</h4>
+            <ul class="space-y-1.5 text-[13px] text-gray-600">
+              <li class="flex items-center gap-2"><i class="fas fa-users text-gray-400 w-4"></i>Kelompok pengelola terdaftar (min. 20 KK)</li>
+              <li class="flex items-center gap-2"><i class="fas fa-file-alt text-gray-400 w-4"></i>Surat rekomendasi kepala desa/lurah</li>
+              <li class="flex items-center gap-2"><i class="fas fa-map text-gray-400 w-4"></i>Peta lokasi dan sumber air</li>
+              <li class="flex items-center gap-2"><i class="fas fa-file-signature text-gray-400 w-4"></i>Rencana pengelolaan dan pembiayaan operasional</li>
+            </ul>
+          </div>
+          <button onclick="openModal('spam')" class="w-full bg-cyan-600 text-white py-3.5 rounded-xl font-bold hover:bg-cyan-700 transition flex items-center justify-center gap-2">
+            <i class="fas fa-paper-plane"></i> Ajukan Permohonan SPAM
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Permohonan -->
+  <div id="modal-layanan" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] flex items-center justify-center p-4 hidden" onclick="if(event.target===this)closeModal()">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative animate-fade-in-down" onclick="event.stopPropagation()">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-xl transition z-10"><i class="fas fa-times"></i></button>
+      <div id="modal-header" class="p-6 pb-0 rounded-t-2xl">
+        <div id="modal-icon" class="w-12 h-12 rounded-xl flex items-center justify-center mb-4"></div>
+        <h3 id="modal-title" class="text-[20px] font-black text-pupr-blue-dark mb-1"></h3>
+        <p id="modal-subtitle" class="text-gray-500 text-[13px] mb-5"></p>
+      </div>
+      <div class="px-6 pb-6 space-y-3">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-[12px] font-bold text-gray-600 block mb-1">Nama Lengkap / Instansi</label>
+            <input type="text" placeholder="Masukkan nama..." class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition">
+          </div>
+          <div>
+            <label class="text-[12px] font-bold text-gray-600 block mb-1">No. Telepon / WA</label>
+            <input type="tel" placeholder="08xxxxxxxxxx" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition">
+          </div>
+        </div>
+        <div>
+          <label class="text-[12px] font-bold text-gray-600 block mb-1">Email</label>
+          <input type="email" placeholder="email@example.com" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition">
+        </div>
+        <div>
+          <label class="text-[12px] font-bold text-gray-600 block mb-1">Kabupaten / Kota Lokasi</label>
+          <select class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition text-gray-600">
+            <option value="">-- Pilih Kabupaten/Kota --</option>
+            <option>Kota Sorong</option>
+            <option>Kabupaten Sorong</option>
+            <option>Kabupaten Raja Ampat</option>
+            <option>Kabupaten Tambrauw</option>
+            <option>Kabupaten Maybrat</option>
+            <option>Kabupaten Sorong Selatan</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-[12px] font-bold text-gray-600 block mb-1">Uraian Permohonan</label>
+          <textarea rows="3" placeholder="Jelaskan kebutuhan / tujuan permohonan Anda..." class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition resize-none"></textarea>
+        </div>
+        <button id="modal-submit-btn" onclick="submitPermohonan()" class="w-full py-3 rounded-xl font-bold text-white text-[14px] transition flex items-center justify-center gap-2">
+          <i class="fas fa-paper-plane"></i> Kirim Permohonan
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Main Content Area -->
   <main class="max-w-[1400px] mx-auto px-6 py-[100px] grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12">
@@ -320,16 +657,52 @@
         
         <ul class="space-y-1 relative z-10">
           <li>
-            <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group demo-link" href="#">
+            <button onclick="openModal('perizinan')" class="w-full flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group text-left">
               <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
-                <i class="fas fa-file-signature"></i>
+                <i class="fas fa-file-contract"></i>
               </div>
               <div class="flex-1">
-                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">Pengajuan Permohonan</h4>
-                <p class="text-gray-400 text-[13px] leading-tight">Ajukan permohonan layanan PUPR</p>
+                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">Rekomtek &amp; Perizinan</h4>
+                <p class="text-gray-400 text-[13px] leading-tight">Jalan provinsi, SDA, dan KKPR</p>
               </div>
               <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
-            </a>
+            </button>
+          </li>
+          <li class="border-t border-white/10">
+            <button onclick="openModal('rtlh')" class="w-full flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group text-left">
+              <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">Daftar Bantuan RTLH</h4>
+                <p class="text-gray-400 text-[13px] leading-tight">Kawasan kumuh &amp; rawan bencana</p>
+              </div>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
+            </button>
+          </li>
+          <li class="border-t border-white/10">
+            <button onclick="openModal('sertifikasi')" class="w-full flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group text-left">
+              <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
+                <i class="fas fa-hard-hat"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">Sertifikasi Konstruksi</h4>
+                <p class="text-gray-400 text-[13px] leading-tight">Pelatihan &amp; SKT untuk TKK lokal</p>
+              </div>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
+            </button>
+          </li>
+          <li class="border-t border-white/10">
+            <button onclick="openModal('spam')" class="w-full flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group text-left">
+              <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
+                <i class="fas fa-tint"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">SPAM Lintas Kab/Kota</h4>
+                <p class="text-gray-400 text-[13px] leading-tight">Air minum &amp; sanitasi komunal</p>
+              </div>
+              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
+            </button>
           </li>
           <li class="border-t border-white/10">
             <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group demo-link" href="#">
@@ -337,8 +710,8 @@
                 <i class="fas fa-search-dollar"></i>
               </div>
               <div class="flex-1">
-                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">Cek Progres Permohonan</h4>
-                <p class="text-gray-400 text-[13px] leading-tight">Pantau status permohonan Anda</p>
+                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">Cek Status Permohonan</h4>
+                <p class="text-gray-400 text-[13px] leading-tight">Pantau progres permohonan Anda</p>
               </div>
               <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
             </a>
@@ -351,18 +724,6 @@
               <div class="flex-1">
                 <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">Pengaduan Masyarakat</h4>
                 <p class="text-gray-400 text-[13px] leading-tight">Sampaikan pengaduan dan aspirasi</p>
-              </div>
-              <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
-            </a>
-          </li>
-          <li class="border-t border-white/10">
-             <a class="flex items-center py-4 px-2 -mx-2 hover:bg-white/5 rounded-lg transition group demo-link" href="#">
-              <div class="text-pupr-yellow mr-5 text-[22px] group-hover:scale-110 transition shrink-0">
-                <i class="fas fa-water"></i>
-              </div>
-              <div class="flex-1">
-                <h4 class="font-bold text-[15px] mb-1 group-hover:text-pupr-yellow transition-colors">SPAM Lintas Kab/Kota</h4>
-                <p class="text-gray-400 text-[13px] leading-tight">Layanan sistem penyediaan air minum antar wilayah</p>
               </div>
               <i class="fas fa-chevron-right text-gray-500 text-xs ml-4 group-hover:text-pupr-yellow group-hover:translate-x-1 transition-all"></i>
             </a>
@@ -472,7 +833,7 @@
       // 3. Demo Links Toast Notification System
       const demoLinks = document.querySelectorAll('.demo-link');
       const toastContainer = document.createElement('div');
-      toastContainer.className = 'fixed bottom-6 right-6 z-[200] flex flex-col space-y-3 pointer-events-none';
+      toastContainer.className = 'fixed bottom-6 right-6 z-[300] flex flex-col space-y-3 pointer-events-none';
       document.body.appendChild(toastContainer);
 
       let toastTimeout;
@@ -480,41 +841,168 @@
       demoLinks.forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
-          
-          // Close mobile menu if open
           if (!mobileMenu.classList.contains('translate-x-full')) {
-             mobileMenuBtn.click();
+            mobileMenuBtn.click();
           }
-
           showToast('Fitur ini sedang dalam tahap pengembangan tim kami.');
         });
       });
 
-      function showToast(message) {
-        // Create toast element
+      function showToast(message, type = 'info') {
         const toast = document.createElement('div');
-        toast.className = 'bg-pupr-blue-dark text-white px-6 py-4 rounded-lg shadow-2xl border-l-4 border-pupr-yellow flex items-center space-x-4 toast-enter-active pointer-events-auto';
+        const isSuccess = type === 'success';
+        toast.className = `${isSuccess ? 'bg-green-700 border-green-400' : 'bg-pupr-blue-dark border-pupr-yellow'} text-white px-6 py-4 rounded-lg shadow-2xl border-l-4 flex items-center space-x-4 toast-enter-active pointer-events-auto`;
         toast.innerHTML = `
-          <i class="fas fa-info-circle text-pupr-yellow text-xl"></i>
+          <i class="fas ${isSuccess ? 'fa-check-circle text-green-300' : 'fa-info-circle text-pupr-yellow'} text-xl"></i>
           <p class="font-medium text-[14px]">${message}</p>
           <button class="ml-auto text-gray-400 hover:text-white transition focus:outline-none" onclick="this.parentElement.remove()">
             <i class="fas fa-times"></i>
           </button>
         `;
-        
         toastContainer.appendChild(toast);
-
-        // Remove toast automatically after 3.5 seconds
         setTimeout(() => {
           if (toast.parentElement) {
             toast.classList.remove('toast-enter-active');
             toast.classList.add('toast-exit');
-            setTimeout(() => {
-              if (toast.parentElement) toast.remove();
-            }, 300); // Wait for exit animation
+            setTimeout(() => { if (toast.parentElement) toast.remove(); }, 300);
           }
-        }, 3500);
+        }, 4000);
       }
+
+      // Expose showToast globally for use outside DOMContentLoaded
+      window._showToast = showToast;
+    });
+
+    // ── Tab Switching ──────────────────────────────────────────
+    function switchTab(name) {
+      // Hide all tab contents
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      // Reset all tab buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-pupr-blue', 'text-white', 'border-pupr-blue', 'active-tab');
+        btn.classList.add('border-gray-300', 'text-gray-600');
+      });
+      // Show selected tab
+      const content = document.getElementById('tab-' + name);
+      if (content) content.classList.remove('hidden');
+      // Activate selected tab button
+      const activeBtn = document.querySelector(`[data-tab="${name}"]`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-pupr-blue', 'text-white', 'border-pupr-blue', 'active-tab');
+        activeBtn.classList.remove('border-gray-300', 'text-gray-600');
+      }
+    }
+
+    // ── Open Layanan (scroll + switch tab) ────────────────────
+    function openLayanan(name) {
+      const section = document.getElementById('layanan');
+      if (section) {
+        const offset = section.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+      setTimeout(() => switchTab(name), 400);
+    }
+
+    // ── Modal Config per Layanan ───────────────────────────────
+    const modalConfig = {
+      perizinan: {
+        icon: 'fas fa-file-contract',
+        iconBg: 'bg-blue-100',
+        iconColor: 'text-pupr-blue',
+        title: 'Ajukan Perizinan & Rekomtek',
+        subtitle: 'Rekomtek Jalan Provinsi · Pemanfaatan SDA · KKPR',
+        btnColor: 'bg-pupr-blue hover:bg-blue-800'
+      },
+      rtlh: {
+        icon: 'fas fa-home',
+        iconBg: 'bg-yellow-100',
+        iconColor: 'text-yellow-600',
+        title: 'Daftar Bantuan RTLH',
+        subtitle: 'Bantuan Rumah Tidak Layak Huni — Kewenangan Provinsi',
+        btnColor: 'bg-amber-500 hover:bg-amber-600'
+      },
+      sertifikasi: {
+        icon: 'fas fa-hard-hat',
+        iconBg: 'bg-slate-100',
+        iconColor: 'text-slate-700',
+        title: 'Daftar Pelatihan & Sertifikasi Konstruksi',
+        subtitle: 'Sertifikat Keterampilan Tenaga Kerja (SKT) · Standar K4',
+        btnColor: 'bg-slate-700 hover:bg-slate-800'
+      },
+      spam: {
+        icon: 'fas fa-tint',
+        iconBg: 'bg-cyan-100',
+        iconColor: 'text-cyan-600',
+        title: 'Ajukan Permohonan SPAM / Sanitasi',
+        subtitle: 'Air Minum & Sanitasi Komunal Lintas Kab/Kota',
+        btnColor: 'bg-cyan-600 hover:bg-cyan-700'
+      }
+    };
+
+    // ── Open Modal ────────────────────────────────────────────
+    function openModal(name) {
+      const cfg = modalConfig[name];
+      if (!cfg) return;
+
+      // Set icon
+      const iconEl = document.getElementById('modal-icon');
+      iconEl.className = `w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${cfg.iconBg}`;
+      iconEl.innerHTML = `<i class="${cfg.icon} ${cfg.iconColor} text-xl"></i>`;
+
+      // Set text
+      document.getElementById('modal-title').textContent = cfg.title;
+      document.getElementById('modal-subtitle').textContent = cfg.subtitle;
+
+      // Set button color
+      const btn = document.getElementById('modal-submit-btn');
+      btn.className = `w-full py-3 rounded-xl font-bold text-white text-[14px] transition flex items-center justify-center gap-2 ${cfg.btnColor}`;
+
+      // Store current type
+      btn.dataset.type = name;
+
+      // Show modal
+      const modal = document.getElementById('modal-layanan');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // ── Close Modal ───────────────────────────────────────────
+    function closeModal() {
+      document.getElementById('modal-layanan').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // ── Submit Permohonan ─────────────────────────────────────
+    function submitPermohonan() {
+      const modal = document.getElementById('modal-layanan');
+      const inputs = modal.querySelectorAll('input, select, textarea');
+      let valid = true;
+
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          input.classList.add('border-red-400', 'bg-red-50');
+          valid = false;
+        } else {
+          input.classList.remove('border-red-400', 'bg-red-50');
+        }
+      });
+
+      if (!valid) {
+        if (window._showToast) window._showToast('Mohon lengkapi semua field yang diperlukan.', 'info');
+        return;
+      }
+
+      // Simulate submission success
+      closeModal();
+      inputs.forEach(input => input.value = '');
+      setTimeout(() => {
+        if (window._showToast) window._showToast('Permohonan berhasil dikirim! Tim kami akan menghubungi Anda segera.', 'success');
+      }, 300);
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
     });
   </script>
 
