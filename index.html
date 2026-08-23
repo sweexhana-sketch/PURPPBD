@@ -5,6 +5,8 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>PUPR Provinsi Papua Barat Daya</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style data-purpose="custom-fonts">
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -562,39 +564,45 @@
         <p id="modal-subtitle" class="text-gray-500 text-[13px] mb-5"></p>
       </div>
       <div class="px-6 pb-6 space-y-3">
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="text-[12px] font-bold text-gray-600 block mb-1">Nama Lengkap / Instansi</label>
-            <input type="text" placeholder="Masukkan nama..." class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition">
+        <form id="form-layanan" onsubmit="submitLayananReal(event)">
+          <div class="grid grid-cols-2 gap-3 mb-3">
+            <div>
+              <label class="text-[12px] font-bold text-gray-600 block mb-1">Nama Lengkap / Instansi</label>
+              <input type="text" name="nama" required placeholder="Masukkan nama..." class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition">
+            </div>
+            <div>
+              <label class="text-[12px] font-bold text-gray-600 block mb-1">No. Telepon / WA</label>
+              <input type="tel" name="telepon" required placeholder="08xxxxxxxxxx" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition">
+            </div>
           </div>
-          <div>
-            <label class="text-[12px] font-bold text-gray-600 block mb-1">No. Telepon / WA</label>
-            <input type="tel" placeholder="08xxxxxxxxxx" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition">
+          <div class="mb-3">
+            <label class="text-[12px] font-bold text-gray-600 block mb-1">Email</label>
+            <input type="email" name="email" required placeholder="email@example.com" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition">
           </div>
-        </div>
-        <div>
-          <label class="text-[12px] font-bold text-gray-600 block mb-1">Email</label>
-          <input type="email" placeholder="email@example.com" class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition">
-        </div>
-        <div>
-          <label class="text-[12px] font-bold text-gray-600 block mb-1">Kabupaten / Kota Lokasi</label>
-          <select class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition text-gray-600">
-            <option value="">-- Pilih Kabupaten/Kota --</option>
-            <option>Kota Sorong</option>
-            <option>Kabupaten Sorong</option>
-            <option>Kabupaten Raja Ampat</option>
-            <option>Kabupaten Tambrauw</option>
-            <option>Kabupaten Maybrat</option>
-            <option>Kabupaten Sorong Selatan</option>
-          </select>
-        </div>
-        <div>
-          <label class="text-[12px] font-bold text-gray-600 block mb-1">Uraian Permohonan</label>
-          <textarea rows="3" placeholder="Jelaskan kebutuhan / tujuan permohonan Anda..." class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition resize-none"></textarea>
-        </div>
-        <button id="modal-submit-btn" onclick="submitPermohonan()" class="w-full py-3 rounded-xl font-bold text-white text-[14px] transition flex items-center justify-center gap-2">
-          <i class="fas fa-paper-plane"></i> Kirim Permohonan
-        </button>
+          <div class="mb-3">
+            <label class="text-[12px] font-bold text-gray-600 block mb-1">Kabupaten / Kota Lokasi</label>
+            <select name="lokasi" required class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition text-gray-600">
+              <option value="">-- Pilih Kabupaten/Kota --</option>
+              <option value="Kota Sorong">Kota Sorong</option>
+              <option value="Kabupaten Sorong">Kabupaten Sorong</option>
+              <option value="Kabupaten Raja Ampat">Kabupaten Raja Ampat</option>
+              <option value="Kabupaten Tambrauw">Kabupaten Tambrauw</option>
+              <option value="Kabupaten Maybrat">Kabupaten Maybrat</option>
+              <option value="Kabupaten Sorong Selatan">Kabupaten Sorong Selatan</option>
+            </select>
+          </div>
+          <div class="mb-5">
+            <label class="text-[12px] font-bold text-gray-600 block mb-1">Uraian Permohonan</label>
+            <textarea name="uraian" required rows="3" placeholder="Jelaskan kebutuhan / tujuan permohonan Anda..." class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[13px] focus:outline-none focus:border-pupr-blue transition resize-none"></textarea>
+          </div>
+          
+          <!-- Input Tersembunyi untuk Jenis Layanan -->
+          <input type="hidden" name="jenis_layanan" id="input-jenis-layanan" value="">
+
+          <button type="submit" id="modal-submit-btn" class="w-full py-3 rounded-xl font-bold text-white text-[14px] transition flex items-center justify-center gap-2">
+            <i class="fas fa-paper-plane" id="submit-icon"></i> <span id="submit-text">Kirim Permohonan</span>
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -940,6 +948,11 @@
       }
     };
 
+    // ── Supabase Setup ─────────────────────────────────────────
+    const SUPABASE_URL = 'https://eojssrhtxfxiwfjyduvg.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_aMp7XVyazv4Xiqwu2ngOpw_14kk8D_C';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     // ── Open Modal ────────────────────────────────────────────
     function openModal(name) {
       const cfg = modalConfig[name];
@@ -958,8 +971,8 @@
       const btn = document.getElementById('modal-submit-btn');
       btn.className = `w-full py-3 rounded-xl font-bold text-white text-[14px] transition flex items-center justify-center gap-2 ${cfg.btnColor}`;
 
-      // Store current type
-      btn.dataset.type = name;
+      // Set hidden input value for jenis_layanan
+      document.getElementById('input-jenis-layanan').value = name;
 
       // Show modal
       const modal = document.getElementById('modal-layanan');
@@ -973,32 +986,60 @@
       document.body.style.overflow = '';
     }
 
-    // ── Submit Permohonan ─────────────────────────────────────
-    function submitPermohonan() {
-      const modal = document.getElementById('modal-layanan');
-      const inputs = modal.querySelectorAll('input, select, textarea');
-      let valid = true;
+    // ── Submit Permohonan (Supabase) ──────────────────────────
+    async function submitLayananReal(event) {
+      event.preventDefault(); // Mencegah form memuat ulang halaman
+      
+      const form = event.target;
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
 
-      inputs.forEach(input => {
-        if (!input.value.trim()) {
-          input.classList.add('border-red-400', 'bg-red-50');
-          valid = false;
-        } else {
-          input.classList.remove('border-red-400', 'bg-red-50');
-        }
-      });
+      // Ubah status tombol menjadi loading
+      const submitBtn = document.getElementById('modal-submit-btn');
+      const submitText = document.getElementById('submit-text');
+      const submitIcon = document.getElementById('submit-icon');
+      
+      const originalText = submitText.textContent;
+      const originalIcon = submitIcon.className;
+      
+      submitText.textContent = 'Mengirim...';
+      submitIcon.className = 'fas fa-spinner fa-spin';
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
 
-      if (!valid) {
-        if (window._showToast) window._showToast('Mohon lengkapi semua field yang diperlukan.', 'info');
-        return;
+      try {
+        // Insert data ke tabel Supabase
+        // Pastikan tabel "layanan_permohonan" sudah dibuat di Supabase
+        const { error } = await supabase
+          .from('layanan_permohonan')
+          .insert([
+            {
+              nama: data.nama,
+              telepon: data.telepon,
+              email: data.email,
+              lokasi: data.lokasi,
+              uraian: data.uraian,
+              jenis_layanan: data.jenis_layanan
+            }
+          ]);
+
+        if (error) throw error;
+
+        // Berhasil
+        closeModal();
+        form.reset();
+        if (window._showToast) window._showToast('Permohonan berhasil dikirim dan tersimpan ke database!', 'success');
+        
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        if (window._showToast) window._showToast('Terjadi kesalahan saat mengirim data. Silakan coba lagi.', 'error');
+      } finally {
+        // Kembalikan tombol ke keadaan semula
+        submitText.textContent = originalText;
+        submitIcon.className = originalIcon;
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
       }
-
-      // Simulate submission success
-      closeModal();
-      inputs.forEach(input => input.value = '');
-      setTimeout(() => {
-        if (window._showToast) window._showToast('Permohonan berhasil dikirim! Tim kami akan menghubungi Anda segera.', 'success');
-      }, 300);
     }
 
     // Close modal with Escape key
