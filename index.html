@@ -71,6 +71,7 @@
             <div class="py-2 text-gray-700 font-medium border-t-2 border-pupr-yellow">
               <a href="#" onclick="openProfil('sejarah'); return false;" class="flex items-center px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition"><i class="fas fa-history text-pupr-yellow mr-2 text-sm"></i>Sejarah</a>
               <a href="#" onclick="openProfil('visi-misi'); return false;" class="flex items-center px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition"><i class="fas fa-bullseye text-pupr-yellow mr-2 text-sm"></i>Visi &amp; Misi</a>
+              <a href="#" onclick="openProfil('tupoksi'); return false;" class="flex items-center px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition"><i class="fas fa-tasks text-pupr-yellow mr-2 text-sm"></i>Tugas &amp; Fungsi</a>
               <a href="#" onclick="openProfil('struktur'); return false;" class="flex items-center px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition"><i class="fas fa-sitemap text-pupr-yellow mr-2 text-sm"></i>Struktur Organisasi</a>
             </div>
           </div>
@@ -1069,6 +1070,10 @@
             class="profil-tab-btn px-5 py-3.5 text-sm font-bold border-b-2 border-transparent text-gray-500 hover:text-pupr-blue transition-all">
             <i class="fas fa-bullseye mr-2"></i>Visi &amp; Misi
           </button>
+          <button onclick="switchProfilTab('tupoksi')" id="tab-btn-tupoksi"
+            class="profil-tab-btn px-5 py-3.5 text-sm font-bold border-b-2 border-transparent text-gray-500 hover:text-pupr-blue transition-all">
+            <i class="fas fa-tasks mr-2"></i>Tugas &amp; Fungsi
+          </button>
           <button onclick="switchProfilTab('struktur')" id="tab-btn-struktur"
             class="profil-tab-btn px-5 py-3.5 text-sm font-bold border-b-2 border-transparent text-gray-500 hover:text-pupr-blue transition-all">
             <i class="fas fa-sitemap mr-2"></i>Struktur Organisasi
@@ -1168,6 +1173,49 @@
           </div>
         </div>
 
+        <!-- ── TAB: TUGAS & FUNGSI ─────────────────── -->
+        <div id="tab-tupoksi" class="profil-tab-content hidden">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-10 h-10 bg-pupr-blue rounded-full flex items-center justify-center">
+              <i class="fas fa-tasks text-white text-sm"></i>
+            </div>
+            <h3 class="text-xl font-extrabold text-pupr-blue-dark">Tugas Pokok &amp; Fungsi Dinas PUPR</h3>
+          </div>
+
+          <div class="space-y-6 text-gray-700 text-[15px] leading-relaxed">
+            <div class="bg-blue-50 border-l-4 border-pupr-blue rounded-r-lg p-5">
+              <p class="font-bold text-pupr-blue-dark text-sm mb-2 uppercase tracking-wider">Tugas Pokok</p>
+              <p>Dinas mempunyai tugas pokok <strong>membantu Gubernur melaksanakan urusan pemerintahan di bidang pekerjaan umum dan perumahan rakyat</strong> berdasarkan asas otonomi dan tugas pembantuan serta tugas lainnya yang diberikan oleh Gubernur melalui Sekretaris Daerah.</p>
+            </div>
+
+            <div>
+              <p class="font-bold text-pupr-blue-dark text-sm mb-3 uppercase tracking-wider">Fungsi Dinas</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 flex items-start space-x-3">
+                  <div class="w-6 h-6 rounded bg-pupr-yellow/20 text-pupr-yellow-dark flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">a</div>
+                  <p class="text-sm">Perumusan kebijakan teknis di bidang Pekerjaan Umum dan Perumahan Rakyat;</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 flex items-start space-x-3">
+                  <div class="w-6 h-6 rounded bg-pupr-yellow/20 text-pupr-yellow-dark flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">b</div>
+                  <p class="text-sm">Penyelenggaraan urusan pemerintahan dan pelayanan umum di bidang pekerjaan umum dan perumahan rakyat;</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 flex items-start space-x-3">
+                  <div class="w-6 h-6 rounded bg-pupr-yellow/20 text-pupr-yellow-dark flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">c</div>
+                  <p class="text-sm">Pembinaan dan pelaksanaan tugas di bidang pekerjaan umum dan perumahan rakyat;</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 flex items-start space-x-3">
+                  <div class="w-6 h-6 rounded bg-pupr-yellow/20 text-pupr-yellow-dark flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">d</div>
+                  <p class="text-sm">Pembinaan Unit Pelaksana Teknis Daerah (UPTD); dan</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 flex items-start space-x-3 md:col-span-2">
+                  <div class="w-6 h-6 rounded bg-pupr-yellow/20 text-pupr-yellow-dark flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">e</div>
+                  <p class="text-sm">Pelaksanaan tugas lain yang diberikan oleh Gubernur sesuai dengan tugas dan fungsinya.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- ── TAB: STRUKTUR ORGANISASI ─────────── -->
         <div id="tab-struktur" class="profil-tab-content hidden">
           <div class="flex items-center space-x-3 mb-2">
@@ -1182,7 +1230,7 @@
           <div class="flex justify-center mb-3">
             <div class="bg-pupr-blue text-white rounded-xl px-8 py-3 text-center shadow-lg w-full max-w-xs">
               <p class="text-[10px] font-black uppercase tracking-widest text-pupr-yellow mb-0.5">Kepala Dinas</p>
-              <p class="font-bold text-sm">Yakobus T. Pabimbin, S.T., M.T.</p>
+              <p class="font-bold text-sm">Ir. Viktor F. Solossa, S.Pd, S.T., M.T.</p>
             </div>
           </div>
           <div class="flex justify-center mb-3"><div class="w-0.5 h-5 bg-gray-400"></div></div>
