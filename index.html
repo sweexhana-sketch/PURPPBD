@@ -67,14 +67,15 @@
           <button class="hover:text-pupr-yellow transition flex items-center py-2 focus:outline-none">
             PROFIL <i class="fas fa-chevron-down ml-1.5 text-[10px] group-hover:rotate-180 transition-transform duration-200"></i>
           </button>
-          <div class="absolute left-0 mt-0 w-48 bg-white rounded-b-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover:translate-y-0">
+          <div class="absolute left-0 mt-0 w-52 bg-white rounded-b-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top -translate-y-2 group-hover:translate-y-0">
             <div class="py-2 text-gray-700 font-medium border-t-2 border-pupr-yellow">
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Sejarah</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Visi & Misi</a>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition demo-link">Struktur Organisasi</a>
+              <a href="#" onclick="openProfil('sejarah'); return false;" class="flex items-center px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition"><i class="fas fa-history text-pupr-yellow mr-2 text-sm"></i>Sejarah</a>
+              <a href="#" onclick="openProfil('visi-misi'); return false;" class="flex items-center px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition"><i class="fas fa-bullseye text-pupr-yellow mr-2 text-sm"></i>Visi &amp; Misi</a>
+              <a href="#" onclick="openProfil('struktur'); return false;" class="flex items-center px-4 py-2 hover:bg-gray-100 hover:text-pupr-blue transition"><i class="fas fa-sitemap text-pupr-yellow mr-2 text-sm"></i>Struktur Organisasi</a>
             </div>
           </div>
         </div>
+
 
         <!-- Dropdown Layanan -->
         <div class="relative group">
@@ -1002,7 +1003,304 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeModal();
     });
+
+    // ── Profil Dinas Functions ────────────────────────────────
+    function openProfil(tab) {
+      const modal = document.getElementById('modal-profil');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = 'hidden';
+      if (tab) switchProfilTab(tab);
+    }
+
+    function closeProfil() {
+      const modal = document.getElementById('modal-profil');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+    }
+
+    function switchProfilTab(name) {
+      // Hide all contents
+      document.querySelectorAll('.profil-tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('tab-' + name).classList.remove('hidden');
+
+      // Reset buttons
+      document.querySelectorAll('.profil-tab-btn').forEach(btn => {
+        btn.classList.remove('border-pupr-blue', 'text-pupr-blue');
+        btn.classList.add('border-transparent', 'text-gray-500');
+      });
+
+      // Activate clicked
+      const activeBtn = document.getElementById('tab-btn-' + name);
+      activeBtn.classList.add('border-pupr-blue', 'text-pupr-blue');
+      activeBtn.classList.remove('border-transparent', 'text-gray-500');
+    }
   </script>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- MODAL PROFIL DINAS                                     -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div id="modal-profil" class="fixed inset-0 z-[200] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <!-- Backdrop -->
+    <div onclick="closeProfil()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <!-- Panel -->
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
+      <!-- Header Modal -->
+      <div class="bg-pupr-blue px-8 py-5 flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center space-x-3">
+          <img src="Logo_Papua_Barat_Daya.png" alt="Logo" class="h-10 w-auto">
+          <div>
+            <h2 class="text-white font-extrabold text-lg leading-tight">Profil Dinas PUPR</h2>
+            <p class="text-pupr-yellow text-xs font-bold tracking-widest uppercase">Provinsi Papua Barat Daya</p>
+          </div>
+        </div>
+        <button onclick="closeProfil()" class="text-white hover:text-pupr-yellow text-2xl transition focus:outline-none">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="bg-gray-50 border-b border-gray-200 px-8 flex-shrink-0">
+        <div class="flex space-x-0 -mb-px">
+          <button onclick="switchProfilTab('sejarah')" id="tab-btn-sejarah"
+            class="profil-tab-btn px-5 py-3.5 text-sm font-bold border-b-2 border-pupr-blue text-pupr-blue transition-all">
+            <i class="fas fa-history mr-2"></i>Sejarah
+          </button>
+          <button onclick="switchProfilTab('visi-misi')" id="tab-btn-visi-misi"
+            class="profil-tab-btn px-5 py-3.5 text-sm font-bold border-b-2 border-transparent text-gray-500 hover:text-pupr-blue transition-all">
+            <i class="fas fa-bullseye mr-2"></i>Visi &amp; Misi
+          </button>
+          <button onclick="switchProfilTab('struktur')" id="tab-btn-struktur"
+            class="profil-tab-btn px-5 py-3.5 text-sm font-bold border-b-2 border-transparent text-gray-500 hover:text-pupr-blue transition-all">
+            <i class="fas fa-sitemap mr-2"></i>Struktur Organisasi
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Contents -->
+      <div class="overflow-y-auto flex-1 px-8 py-7">
+
+        <!-- ── TAB: SEJARAH ─────────────────────── -->
+        <div id="tab-sejarah" class="profil-tab-content">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-10 h-10 bg-pupr-blue rounded-full flex items-center justify-center">
+              <i class="fas fa-landmark text-white text-sm"></i>
+            </div>
+            <h3 class="text-xl font-extrabold text-pupr-blue-dark">Sejarah Pembentukan Provinsi Papua Barat Daya</h3>
+          </div>
+
+          <div class="space-y-5 text-gray-700 text-[15px] leading-relaxed">
+            <div class="bg-pupr-yellow/10 border-l-4 border-pupr-yellow rounded-r-lg p-4">
+              <p class="font-bold text-pupr-blue-dark text-sm mb-1">📅 Deklarasi Pertama — 5 Januari 2007</p>
+              <p>Usulan pembentukan Provinsi Papua Barat Daya telah digulirkan sejak Papua belum terpisah menjadi Provinsi Papua dan Papua Barat. Deklarasi pertama dilakukan di <strong>Kota Sorong</strong> pada tanggal <strong>5 Januari 2007</strong>, kemudian dideklarasikan kembali di <strong>Jayapura</strong> pada tanggal <strong>12 Januari 2007</strong>.</p>
+            </div>
+
+            <p>Deklarasi tersebut dilakukan oleh putra-putri Papua Bagian Barat Daya bersama putra-putri nusantara yang berdomisili di wilayah kepala burung khususnya <strong>Sorong Raya</strong>.</p>
+
+            <div class="bg-blue-50 border-l-4 border-pupr-blue rounded-r-lg p-4">
+              <p class="font-bold text-pupr-blue-dark text-sm mb-1">🏛️ Perkembangan di DPR RI</p>
+              <p>Perjuangan pembentukan Provinsi ini mendapat titik terang pada tahun <strong>2009</strong> di mana calon Provinsi Papua Barat Daya menjadi salah satu dari <strong>33 RUU prioritas</strong> pembahasan di DPR RI. Namun pada pembahasan 19 RUU DOB tahun 2012–2014, RUU ini tidak diikutsertakan, antara lain karena belum adanya rekomendasi dari Gubernur Papua Barat.</p>
+            </div>
+
+            <div class="bg-green-50 border-l-4 border-green-500 rounded-r-lg p-4">
+              <p class="font-bold text-green-800 text-sm mb-1">✅ Disahkan — 17 November 2022</p>
+              <p>Setelah melalui perjalanan panjang, Provinsi Papua Barat Daya akhirnya disahkan oleh DPR RI melalui <strong>Undang-Undang Nomor 29 Tahun 2022</strong> tentang Pembentukan Provinsi Papua Barat Daya, pada tanggal <strong>Kamis, 17 November 2022</strong>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── TAB: VISI & MISI ─────────────────── -->
+        <div id="tab-visi-misi" class="profil-tab-content hidden">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-10 h-10 bg-pupr-blue rounded-full flex items-center justify-center">
+              <i class="fas fa-bullseye text-white text-sm"></i>
+            </div>
+            <h3 class="text-xl font-extrabold text-pupr-blue-dark">Visi &amp; Misi Dinas PUPR</h3>
+          </div>
+
+          <!-- Visi -->
+          <div class="bg-pupr-blue rounded-xl p-6 mb-6 text-center">
+            <p class="text-pupr-yellow text-xs font-black uppercase tracking-[4px] mb-3">VISI</p>
+            <p class="text-white font-bold text-base leading-relaxed">
+              "Masyarakat Papua Barat Daya yang Maju, Mandiri dan Sejahtera Berbasis Pertumbuhan Ekonomi Lokal Sebagai Upaya Pembangunan yang Berkesinambungan dan Berkelanjutan"
+            </p>
+          </div>
+
+          <!-- Misi -->
+          <div>
+            <p class="text-pupr-yellow text-xs font-black uppercase tracking-[4px] mb-4">MISI</p>
+            <div class="space-y-4">
+              <div class="flex space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-pupr-yellow transition">
+                <div class="w-9 h-9 bg-pupr-yellow rounded-full flex items-center justify-center flex-shrink-0 font-black text-pupr-blue-dark text-sm">1</div>
+                <div>
+                  <p class="font-bold text-pupr-blue-dark text-sm mb-1">SDM Berkualitas &amp; Inovatif</p>
+                  <p class="text-gray-600 text-sm leading-relaxed">Mewujudkan SDM yang berkualitas dan inovatif berbasis modal sosial. Peningkatan kualitas sumber daya manusia dengan fokus pada sektor pendidikan dan kesehatan, dimulai dari ibu hamil hingga anak-anak.</p>
+                </div>
+              </div>
+              <div class="flex space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-pupr-yellow transition">
+                <div class="w-9 h-9 bg-pupr-yellow rounded-full flex items-center justify-center flex-shrink-0 font-black text-pupr-blue-dark text-sm">2</div>
+                <div>
+                  <p class="font-bold text-pupr-blue-dark text-sm mb-1">Tata Kelola Pemerintahan Berbasis e-Government</p>
+                  <p class="text-gray-600 text-sm leading-relaxed">Membangun tata kelola pemerintahan yang baik dengan mengadopsi teknologi berbasis e-government untuk menciptakan transparansi dan efisiensi dalam pemerintahan yang akuntabel dan berkelanjutan.</p>
+                </div>
+              </div>
+              <div class="flex space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-pupr-yellow transition">
+                <div class="w-9 h-9 bg-pupr-yellow rounded-full flex items-center justify-center flex-shrink-0 font-black text-pupr-blue-dark text-sm">3</div>
+                <div>
+                  <p class="font-bold text-pupr-blue-dark text-sm mb-1">Pengembangan Ekonomi Berbasis Potensi Lokal</p>
+                  <p class="text-gray-600 text-sm leading-relaxed">Memanfaatkan sumber daya alam yang melimpah di Papua Barat Daya sebagai penggerak utama ekonomi daerah.</p>
+                </div>
+              </div>
+              <div class="flex space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-pupr-yellow transition">
+                <div class="w-9 h-9 bg-pupr-yellow rounded-full flex items-center justify-center flex-shrink-0 font-black text-pupr-blue-dark text-sm">4</div>
+                <div>
+                  <p class="font-bold text-pupr-blue-dark text-sm mb-1">Peningkatan Konektivitas Wilayah</p>
+                  <p class="text-gray-600 text-sm leading-relaxed">Mengatasi masalah keterisolasian beberapa daerah dan memastikan pemerataan pembangunan infrastruktur agar dapat dirasakan merata oleh seluruh masyarakat.</p>
+                </div>
+              </div>
+              <div class="flex space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-pupr-yellow transition">
+                <div class="w-9 h-9 bg-pupr-yellow rounded-full flex items-center justify-center flex-shrink-0 font-black text-pupr-blue-dark text-sm">5</div>
+                <div>
+                  <p class="font-bold text-pupr-blue-dark text-sm mb-1">Penguatan Adat &amp; Budaya Lokal</p>
+                  <p class="text-gray-600 text-sm leading-relaxed">Menjaga hak-hak masyarakat adat dan melibatkan mereka dalam proses pembangunan daerah dengan kearifan lokal yang menjadi dasar otonomi khusus Papua Barat Daya.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── TAB: STRUKTUR ORGANISASI ─────────── -->
+        <div id="tab-struktur" class="profil-tab-content hidden">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-10 h-10 bg-pupr-blue rounded-full flex items-center justify-center">
+              <i class="fas fa-sitemap text-white text-sm"></i>
+            </div>
+            <h3 class="text-xl font-extrabold text-pupr-blue-dark">Struktur Organisasi Dinas PUPR</h3>
+          </div>
+          <p class="text-gray-500 text-sm mb-6">Bagan Struktur Organisasi Perangkat Daerah (OPD) Dinas Pekerjaan Umum dan Perumahan Rakyat Provinsi Papua Barat Daya</p>
+
+          <!-- Kepala Dinas -->
+          <div class="mb-5">
+            <div class="bg-pupr-blue text-white rounded-xl p-4 text-center shadow-lg">
+              <i class="fas fa-user-tie text-pupr-yellow text-2xl mb-2"></i>
+              <p class="text-xs font-black uppercase tracking-widest text-pupr-yellow mb-1">Kepala Dinas</p>
+              <p class="font-bold text-base">Ir. Kornelius Frengky Sagrim, S.T.</p>
+            </div>
+          </div>
+
+          <!-- Garis -->
+          <div class="flex justify-center mb-5"><div class="w-0.5 h-6 bg-gray-300"></div></div>
+
+          <!-- Sekretaris & Pejabat Fungsional -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+            <div class="bg-pupr-blue/90 text-white rounded-xl p-4 text-center shadow">
+              <p class="text-xs font-black uppercase tracking-widest text-pupr-yellow mb-1">Sekretaris</p>
+              <p class="font-bold text-sm">Ismat Hi. Muhd Nur, S.E.</p>
+            </div>
+            <div class="bg-gray-700 text-white rounded-xl p-4 text-center shadow">
+              <p class="text-xs font-black uppercase tracking-widest text-pupr-yellow mb-1">Pejabat Fungsional</p>
+              <p class="font-semibold text-sm">—</p>
+            </div>
+          </div>
+
+          <!-- Sub Bagian -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6 pl-4 border-l-2 border-pupr-yellow ml-4">
+            <div class="bg-yellow-50 border border-pupr-yellow rounded-lg p-3">
+              <p class="text-[10px] font-black uppercase tracking-wider text-pupr-yellow mb-1">Kepala Sub Bagian Perencanaan</p>
+              <p class="font-bold text-gray-700 text-sm">Zainuri Ichwan, S.T.</p>
+            </div>
+            <div class="bg-yellow-50 border border-pupr-yellow rounded-lg p-3">
+              <p class="text-[10px] font-black uppercase tracking-wider text-pupr-yellow mb-1">Kepala Sub Bagian Umum &amp; Kepegawaian</p>
+              <p class="font-bold text-gray-700 text-sm">—</p>
+            </div>
+            <div class="bg-yellow-50 border border-pupr-yellow rounded-lg p-3 md:col-span-2">
+              <p class="text-[10px] font-black uppercase tracking-wider text-pupr-yellow mb-1">Kepala Sub Bagian Data &amp; Informasi Publik</p>
+              <p class="font-bold text-gray-700 text-sm">Calvin Asmuruf, S.T.</p>
+            </div>
+          </div>
+
+          <!-- 4 Bidang -->
+          <p class="text-[10px] font-black uppercase tracking-[4px] text-pupr-yellow mb-3">Bidang-Bidang</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+
+            <!-- Bidang Bina Marga -->
+            <div class="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+              <div class="bg-pupr-blue px-4 py-3">
+                <p class="text-pupr-yellow text-[10px] font-black uppercase tracking-wider">Kepala Bidang</p>
+                <p class="text-white font-bold text-sm">Bina Marga</p>
+                <p class="text-gray-300 text-xs mt-0.5">Yakobus T. Pabimbin, S.T., M.T.</p>
+              </div>
+              <div class="bg-gray-50 px-4 py-3 space-y-2 text-xs text-gray-700">
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Perencanaan Teknik &amp; Evaluasi</span><span class="text-gray-500">Dedy Junaidy Ariyanto, S.T.</span></div></div>
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Pembangunan Jalan &amp; Jembatan</span><span class="text-gray-500">Angky J. Manuputty, S.T., M.T.</span></div></div>
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Reservasi Jalan &amp; Jembatan</span><span class="text-gray-500">Andi Faroland, S.T., M.T.</span></div></div>
+              </div>
+            </div>
+
+            <!-- Bidang Sumber Daya Air -->
+            <div class="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+              <div class="bg-pupr-blue px-4 py-3">
+                <p class="text-pupr-yellow text-[10px] font-black uppercase tracking-wider">Kepala Bidang</p>
+                <p class="text-white font-bold text-sm">Sumber Daya Air</p>
+                <p class="text-gray-300 text-xs mt-0.5">Origenes Antoh, S.T., M.T.</p>
+              </div>
+              <div class="bg-gray-50 px-4 py-3 space-y-2 text-xs text-gray-700">
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Perencanaan SDA</span><span class="text-gray-500">Nikolas Kehek, S.T., M.T.</span></div></div>
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Pelaksanaan Sumber Daya Air</span><span class="text-gray-500">Ishak Sapan Rumapak, S.T., M.T.</span></div></div>
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Operasi &amp; Pemeliharaan</span><span class="text-gray-500">Eliezer Nelson Homer, S.T., M.T.</span></div></div>
+              </div>
+            </div>
+
+            <!-- Bidang Cipta Karya & Tata Ruang -->
+            <div class="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+              <div class="bg-pupr-blue px-4 py-3">
+                <p class="text-pupr-yellow text-[10px] font-black uppercase tracking-wider">Kepala Bidang</p>
+                <p class="text-white font-bold text-sm">Cipta Karya &amp; Tata Ruang</p>
+                <p class="text-gray-300 text-xs mt-0.5">Sarati Konjol, S.T.</p>
+              </div>
+              <div class="bg-gray-50 px-4 py-3 space-y-2 text-xs text-gray-700">
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Penyehatan Lingkungan &amp; Air Minum</span><span class="text-gray-500">Maykel Filemon Frasawi, S.T.</span></div></div>
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Penataan Bangunan &amp; Permukiman</span><span class="text-gray-500">Habel Iek, S.T.</span></div></div>
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Tata Ruang</span><span class="text-gray-500">Martinus Iek, S.T.</span></div></div>
+              </div>
+            </div>
+
+            <!-- Bidang Perumahan & Bina Konstruksi -->
+            <div class="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+              <div class="bg-pupr-blue px-4 py-3">
+                <p class="text-pupr-yellow text-[10px] font-black uppercase tracking-wider">Kepala Bidang</p>
+                <p class="text-white font-bold text-sm">Perumahan &amp; Bina Konstruksi</p>
+                <p class="text-gray-300 text-xs mt-0.5">Izakh Kambuaya, S.T., M.T.</p>
+              </div>
+              <div class="bg-gray-50 px-4 py-3 space-y-2 text-xs text-gray-700">
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Perumahan &amp; Kawasan Permukiman</span><span class="text-gray-500">Ali Paus Paus, S.T., M.A.P.</span></div></div>
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Prasarana, Sarana &amp; Utilitas</span><span class="text-gray-500">Mesak Howay, S.Sos.</span></div></div>
+                <div class="flex items-start space-x-2"><i class="fas fa-caret-right text-pupr-yellow mt-0.5"></i><div><span class="font-bold block">Kepala Seksi Bina Konstruksi</span><span class="text-gray-500">—</span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- UPTD -->
+          <div class="bg-gray-100 rounded-xl p-4 mt-2">
+            <p class="text-[10px] font-black uppercase tracking-[4px] text-gray-500 mb-2">Unit Pelaksana Teknis Daerah (UPTD)</p>
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-building text-pupr-blue text-lg"></i>
+              <div>
+                <p class="font-bold text-gray-700 text-sm">Kepala UPTD</p>
+                <p class="text-gray-500 text-xs">—</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Modal -->
+      <div class="border-t border-gray-100 px-8 py-4 bg-gray-50 flex-shrink-0 flex justify-end">
+        <button onclick="closeProfil()" class="bg-pupr-blue text-white px-6 py-2 rounded-lg font-bold text-sm hover:bg-pupr-blue-dark transition">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
