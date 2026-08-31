@@ -509,42 +509,59 @@ const InfoTataRuang: React.FC = () => {
                     </p>
 
                     <div className="grid md:grid-cols-2 gap-8">
-                        {/* WhatsApp */}
+                        {/* WhatsApp Konsultasi & Cek Plot */}
                         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                             <div className="flex items-center space-x-3 mb-4">
                                 <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
                                     <i className="fab fa-whatsapp text-2xl text-white"></i>
                                 </div>
-                                <h3 className="text-xl font-bold">Layanan WhatsApp (Fast Response)</h3>
+                                <h3 className="text-xl font-bold">Layanan WhatsApp (Konsultasi & Cek Plot)</h3>
                             </div>
                             <p className="text-blue-100 mb-4">
                                 Jam operasional: <strong>Senin - Jumat (08.00 - 16.00 WIT)</strong>
                             </p>
-                            <button
-                                onClick={() => window.open('https://wa.me/6281141902984', '_blank')}
-                                className="bg-green-500 hover:bg-green-400 text-white px-6 py-3 rounded-xl font-bold w-full transition-all active:scale-95 shadow-lg"
-                            >
-                                <i className="fab fa-whatsapp mr-2"></i>
-                                Klik untuk Chat: 0811-4190-2984
-                            </button>
+                            
+                            <div className="space-y-3">
+                                <button
+                                    onClick={() => {
+                                        const text = `Halo Admin, saya ingin berkonsultasi mengenai peruntukan tata ruang.`;
+                                        window.open(`https://wa.me/6281141902984?text=${encodeURIComponent(text)}`, '_blank');
+                                    }}
+                                    className="bg-green-500 hover:bg-green-400 text-white px-6 py-3 rounded-xl font-bold w-full transition-all active:scale-95 shadow-lg flex items-center justify-center"
+                                >
+                                    <i className="fab fa-whatsapp mr-2"></i>
+                                    Chat Konsultasi Umum
+                                </button>
+
+                                <button
+                                    onClick={() => {
+                                        const text = `Halo Admin, saya ingin melakukan Cek Plot Mandiri.\n\n*Koordinat Lokasi (Link Google Maps):*\n\n*Rencana Bangunan:*`;
+                                        window.open(`https://wa.me/6281141902984?text=${encodeURIComponent(text)}`, '_blank');
+                                    }}
+                                    className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold w-full transition-all active:scale-95 shadow-lg flex items-center justify-center"
+                                >
+                                    <i className="fas fa-map-marker-alt mr-2"></i>
+                                    Form Cek Plot Lokasi
+                                </button>
+                            </div>
                         </div>
 
-                        {/* Formulir */}
+                        {/* Formulir Pelanggaran */}
                         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                             <div className="flex items-center space-x-3 mb-4">
                                 <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
-                                    <i className="fas fa-clipboard-list text-2xl text-blue-900"></i>
+                                    <i className="fas fa-exclamation-triangle text-2xl text-blue-900"></i>
                                 </div>
-                                <h3 className="text-xl font-bold">Formulir Cek Plot Mandiri</h3>
+                                <h3 className="text-xl font-bold">Lapor Pelanggaran Tata Ruang</h3>
                             </div>
                             <p className="text-blue-100 mb-4">
-                                Laporkan dugaan pelanggaran tata ruang (alih fungsi lahan, bangunan tanpa izin, pembukaan lahan di kawasan lindung, dll) langsung ke Bidang Tata Ruang.
+                                Laporkan dugaan pelanggaran tata ruang (alih fungsi lahan, bangunan tanpa izin, pembukaan lahan di kawasan lindung, dll) langsung ke sistem kami.
                             </p>
                             <button
                                 onClick={() => navigate('/lapor-tata-ruang')}
-                                className="bg-yellow-500 hover:bg-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold w-full transition-all active:scale-95 shadow-lg">
+                                className="bg-yellow-500 hover:bg-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold w-full transition-all active:scale-95 shadow-lg flex items-center justify-center h-[52px] mt-11">
                                 <i className="fas fa-paper-plane mr-2"></i>
-                                Lapor Pelanggaran Tata Ruang
+                                Isi Form Pelanggaran
                             </button>
                         </div>
                     </div>
