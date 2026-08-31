@@ -5,7 +5,6 @@ import RoadBridgeMatrix from './RoadBridgeMatrix';
 import { sendBlazwaMessage } from '../services/whatsappService';
 import { verifyLocation, formatVerificationResult } from '../services/spatialVerificationClient';
 import { uploadImage, compressImage } from '../services/imageUploadService';
-import { saveToGoogleSheets } from '../services/googleSheetsService';
 
 const AksesJalan: React.FC = () => {
     const navigate = useNavigate();
@@ -229,25 +228,24 @@ ${verificationText}
 *Deskripsi:* ${reportForm.description}
 ${photoUrl ? `\n*Foto:* Terlampir` : ''}`;
 
-            // 6. Save to Google Sheets
-            console.log('Saving to Google Sheets...');
-            const sheetData = {
-                timestamp: new Date().toISOString(),
-                reporterPhone: '-', // Will be filled from WhatsApp
-                location: reportForm.location,
-                coordinates: reportForm.coordinates,
-                latitude: lat,
-                longitude: lng,
-                verificationStatus: verification.result ? 'Jalan Provinsi' : 'Bukan Jalan Provinsi',
-                roadName: verification.roadName || '-',
-                description: reportForm.description,
-                photoUrl: photoUrl || '-',
-                status: 'Baru' as const
-            };
-
-            const sheetsResult = await saveToGoogleSheets(sheetData);
-            if (!sheetsResult.success) {
-                console.warn('Failed to save to Google Sheets:', sheetsResult.error);
+            // 6. Save to Supabase
+            console.log('Saving to Supabase...');
+            const { aduanService } = await import('../services/aduanService');
+            try {
+                await aduanService.tambahAduan({
+                    kategori: 'Jalan',
+                    lokasi_jalan: reportForm.location,
+                    latitude: lat.toString(),
+                    longitude: lng.toString(),
+                    deskripsi: reportForm.description,
+                    image_url: photoUrl || '',
+                    jurisdiction: verification.result ? 'Jalan Provinsi' : 'Bukan Jalan Provinsi',
+                    source: 'Web - Akses Jalan',
+                    status: 'Baru'
+                });
+                console.log('Successfully saved to Supabase');
+            } catch (error) {
+                console.warn('Failed to save to Supabase:', error);
                 // Continue anyway - don't block WhatsApp send
             }
 
