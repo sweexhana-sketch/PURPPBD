@@ -2,6 +2,7 @@
 import { AduanReport } from '../types';
 import { aduanService } from '../services/aduanService';
 import { authService } from '../services/authService';
+import DashboardKKPR from './DashboardKKPR';
 
 const DashboardAdminAduan: React.FC = () => {
     const [reports, setReports] = useState<AduanReport[]>([]);
@@ -39,7 +40,7 @@ const DashboardAdminAduan: React.FC = () => {
 
     const availableTabs = useMemo(() => {
         if (userRole === 'super_admin' || userRole === 'ADUAN_MANAGER') {
-            return ['Semua', 'Jalan', 'Cipta Karya', 'Perumahan', 'Tata Ruang'];
+            return ['Semua', 'Jalan', 'Cipta Karya', 'Perumahan', 'Tata Ruang', 'Permohonan KKPR'];
         } else if (userRole === 'ADMIN_BINA_MARGA') {
             return ['Jalan'];
         } else if (userRole === 'ADMIN_CIPTA_KARYA') {
@@ -47,7 +48,7 @@ const DashboardAdminAduan: React.FC = () => {
         } else if (userRole === 'ADMIN_PERUMAHAN') {
             return ['Perumahan'];
         } else if (userRole === 'ADMIN_TATA_RUANG') {
-            return ['Tata Ruang'];
+            return ['Tata Ruang', 'Permohonan KKPR'];
         }
         return ['Semua', 'Jalan', 'Cipta Karya', 'Perumahan', 'Tata Ruang'];
     }, [userRole]);
@@ -116,69 +117,66 @@ const DashboardAdminAduan: React.FC = () => {
                             <div className="p-12 text-center text-gray-500">Memuat laporan...</div>
                         ) : (
                         <table className="w-full text-left">
-                            <thead className="bg-gray-50 border-b border-gray-200">
+                            <thead className="bg-gray-50 text-gray-500 text-sm border-b border-gray-200">
                                 <tr>
-                                    <th className="px-6 py-4 font-bold text-gray-700 text-sm">Kategori & Waktu</th>
-                                    <th className="px-6 py-4 font-bold text-gray-700 text-sm">Detail Laporan</th>
-                                    <th className="px-6 py-4 font-bold text-gray-700 text-sm">Lokasi</th>
-                                    <th className="px-6 py-4 font-bold text-gray-700 text-sm">Status</th>
+                                    <th className="p-4 font-semibold">Tanggal</th>
+                                    <th className="p-4 font-semibold">Pelapor</th>
+                                    <th className="p-4 font-semibold">Kategori</th>
+                                    <th className="p-4 font-semibold">Detail Laporan</th>
+                                    <th className="p-4 font-semibold">Lokasi</th>
+                                    <th className="p-4 font-semibold">Status</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100">
                                 {filteredReports.length === 0 ? (
                                     <tr>
-                                        <td colSpan={4} className="px-6 py-12 text-center text-gray-400">
+                                        <td colSpan={6} className="p-8 text-center text-gray-500">
                                             Tidak ada laporan ditemukan.
                                         </td>
                                     </tr>
                                 ) : (
-                                    filteredReports.map((report) => (
-                                        <tr key={report.id} className="hover:bg-blue-50/50 transition-colors">
-                                            <td className="px-6 py-4 align-top">
-                                                <span className={inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase mb-1 }>
+                                    filteredReports.map(report => (
+                                        <tr key={report.id} className="hover:bg-gray-50 transition-colors">
+                                            <td className="p-4 text-sm text-gray-600">
+                                                {new Date(report.created_at!).toLocaleDateString('id-ID', {
+                                                    day: 'numeric', month: 'short', year: 'numeric'
+                                                })}
+                                            </td>
+                                            <td className="p-4">
+                                                <div className="font-bold text-gray-800">{report.nama_pelapor}</div>
+                                                <div className="text-sm text-blue-600">{report.no_hp}</div>
+                                            </td>
+                                            <td className="p-4">
+                                                <span className="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-bold">
                                                     {report.kategori}
                                                 </span>
-                                                <div className="text-xs text-gray-500">{report.created_at ? new Date(report.created_at).toLocaleDateString('id-ID') : '-'}</div>
-                                                <div className="text-[10px] text-gray-400">{report.created_at ? new Date(report.created_at).toLocaleTimeString('id-ID') : '-'}</div>
                                             </td>
-                                            <td className="px-6 py-4 align-top">
-                                                <div className="font-bold text-gray-900 mb-1">{report.nama_pelapor}</div>
-                                                <div className="text-xs text-blue-600 mb-2"><i className="fab fa-whatsapp mr-1"></i>{report.no_hp}</div>
-                                                <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                            <td className="p-4">
+                                                <p className="text-sm text-gray-600 line-clamp-2 max-w-xs" title={report.deskripsi}>
                                                     {report.deskripsi}
-                                                    {report.foto_url && (
-                                                        <a href={report.foto_url} target="_blank" rel="noopener noreferrer" className="block mt-2 text-blue-600 hover:underline text-xs font-bold flex items-center">
-                                                            <i className="fas fa-image mr-1"></i> Lihat Foto Lampiran
-                                                        </a>
-                                                    )}
-                                                </div>
+                                                </p>
                                             </td>
-                                            <td className="px-6 py-4 align-top">
-                                                <div className="text-sm font-medium text-gray-900">{report.lokasi_kejadian || '-'}</div>
-                                                <div className="flex gap-2 mt-2">
-                                                    {report.latitude && report.longitude && (
-                                                        <a href={https://www.google.com/maps?q=,} target="_blank" rel="noopener noreferrer" className="text-[10px] bg-red-50 text-red-600 px-2 py-1 rounded font-bold hover:bg-red-100 transition-colors">
-                                                            <i className="fas fa-map-marker-alt mr-1"></i> Maps
-                                                        </a>
-                                                    )}
-                                                </div>
+                                            <td className="p-4 text-sm text-gray-600 max-w-[200px] truncate">
+                                                {report.lokasi_kejadian || '-'}
                                             </td>
-                                            <td className="px-6 py-4 align-top">
+                                            <td className="p-4">
                                                 <select
                                                     value={report.status}
                                                     onChange={(e) => updateReportStatus(report.id!, e.target.value as any)}
-                                                    className={	ext-xs font-bold rounded-lg border px-3 py-2 outline-none transition-colors w-full cursor-pointer
-                                                        }
+                                                    className={`text-sm font-bold rounded-lg border-2 px-3 py-2 outline-none transition-colors
+                                                        ${report.status === 'Baru' ? 'bg-red-50 text-red-600 border-red-200' :
+                                                            report.status === 'Diproses' ? 'bg-yellow-50 text-yellow-600 border-yellow-200' :
+                                                                'bg-green-50 text-green-600 border-green-200'
+                                                        }`}
                                                 >
-                                                    <option value="Baru" className="text-gray-900 bg-white">🔴 Baru</option>
-                                                    <option value="Diproses" className="text-gray-900 bg-white">🟡 Diproses</option>
-                                                    <option value="Selesai" className="text-gray-900 bg-white">🟢 Selesai</option>
+                                                    <option value="Baru" className="text-gray-900 bg-white">Baru</option>
+                                                    <option value="Diproses" className="text-gray-900 bg-white">Diproses</option>
+                                                    <option value="Selesai" className="text-gray-900 bg-white">Selesai</option>
                                                 </select>
                                             </td>
                                         </tr>
                                     ))
-                                )
-                            }
+                                )}
                             </tbody>
                         </table>
                         )}
@@ -190,4 +188,3 @@ const DashboardAdminAduan: React.FC = () => {
 };
 
 export default DashboardAdminAduan;
-
