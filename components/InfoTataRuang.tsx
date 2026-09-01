@@ -498,6 +498,116 @@ const InfoTataRuang: React.FC = () => {
                     </div>
                 </section >
 
+                {/* === KKPR SECTION === */}
+                <section className="bg-white rounded-3xl shadow-lg p-8 md:p-12 border border-gray-100">
+                    <h2 className="text-3xl font-bold text-blue-900 mb-3 flex items-center">
+                        <i className="fas fa-file-alt mr-3 text-yellow-500"></i>
+                        Permohonan KKPR
+                    </h2>
+                    <p className="text-gray-600 mb-8 text-lg">
+                        <strong>Kesesuaian Kegiatan Pemanfaatan Ruang (KKPR)</strong> adalah dokumen wajib yang harus diperoleh sebelum melaksanakan pembangunan fisik di wilayah Papua Barat Daya.
+                    </p>
+
+                    {/* Alur Pelayanan */}
+                    <div className="bg-blue-50 rounded-2xl p-6 mb-8 border border-blue-100">
+                        <h3 className="text-lg font-black text-blue-900 mb-5 flex items-center gap-2">
+                            <i className="fas fa-stream text-blue-600"></i>
+                            Alur Pelayanan KKPR (10 Langkah)
+                        </h3>
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                            {[
+                                { no: '1', label: 'Siapkan Dokumen', icon: 'fa-folder-open' },
+                                { no: '2', label: 'Pengajuan via OSS / Kanal Layanan', icon: 'fa-upload' },
+                                { no: '3', label: 'Cek Kelengkapan Administrasi', icon: 'fa-clipboard-check' },
+                                { no: '4', label: 'Verifikasi Koordinat Lokasi', icon: 'fa-map-marker-alt' },
+                                { no: '5', label: 'Periksa Kesesuaian Tata Ruang', icon: 'fa-search' },
+                                { no: '6', label: 'Validasi Teknis Tata Ruang', icon: 'fa-check-double' },
+                                { no: '7', label: 'Klarifikasi / Perbaikan Dokumen', icon: 'fa-edit' },
+                                { no: '8', label: 'Hasil Penilaian Kesesuaian', icon: 'fa-poll' },
+                                { no: '9', label: 'Penerbitan Produk KKPR', icon: 'fa-stamp' },
+                                { no: '10', label: 'Pemohon Terima Dokumen KKPR', icon: 'fa-award' },
+                            ].map(step => (
+                                <div key={step.no} className="bg-white rounded-xl p-3 border border-blue-100 text-center shadow-sm">
+                                    <div className="w-8 h-8 bg-blue-900 text-white rounded-full flex items-center justify-center text-xs font-black mx-auto mb-2">{step.no}</div>
+                                    <i className={`fas ${step.icon} text-blue-500 text-lg mb-1 block`}></i>
+                                    <p className="text-xs text-gray-600 font-medium leading-tight">{step.label}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Jenis KKPR */}
+                    <div className="grid md:grid-cols-3 gap-4 mb-8">
+                        {[
+                            { type: 'KKKPR', full: 'Konfirmasi KKPR', icon: 'fa-bolt', color: 'green', desc: 'Wilayah yang sudah memiliki RDTR terintegrasi OSS. Proses otomatis.' },
+                            { type: 'PKKPR', full: 'Persetujuan KKPR', icon: 'fa-file-signature', color: 'blue', desc: 'Wilayah belum ada RDTR. Diproses manual oleh instansi berwenang.' },
+                            { type: 'RKKPR', full: 'Rekomendasi KKPR', icon: 'fa-star', color: 'yellow', desc: 'Khusus kegiatan strategis nasional. Dari pemerintah pusat.' },
+                        ].map(item => (
+                            <div key={item.type} className={`rounded-2xl p-5 border-2 ${item.color === 'green' ? 'border-green-200 bg-green-50' : item.color === 'blue' ? 'border-blue-200 bg-blue-50' : 'border-yellow-200 bg-yellow-50'}`}>
+                                <div className="flex items-center gap-3 mb-2">
+                                    <i className={`fas ${item.icon} text-xl ${item.color === 'green' ? 'text-green-600' : item.color === 'blue' ? 'text-blue-600' : 'text-yellow-600'}`}></i>
+                                    <div>
+                                        <span className={`font-black text-base ${item.color === 'green' ? 'text-green-800' : item.color === 'blue' ? 'text-blue-800' : 'text-yellow-800'}`}>{item.type}</span>
+                                        <p className="text-xs font-semibold text-gray-500">{item.full}</p>
+                                    </div>
+                                </div>
+                                <p className="text-sm text-gray-600">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Kewenangan */}
+                    <div className="bg-gray-50 rounded-2xl p-6 mb-8 border border-gray-100">
+                        <h3 className="font-black text-gray-900 mb-4 flex items-center gap-2">
+                            <i className="fas fa-building-columns text-blue-600"></i>
+                            Kewenangan Instansi
+                        </h3>
+                        <div className="space-y-3">
+                            {[
+                                { instansi: 'Pemerintah Pusat (OSS/ATR-BPN)', kewenangan: 'Semua kegiatan berusaha yang menggunakan sistem OSS', icon: 'fa-landmark' },
+                                { instansi: 'Pemerintah Provinsi Papua Barat Daya', kewenangan: 'Kegiatan non-berusaha lintas Kab/Kota atau kewenangan provinsi', icon: 'fa-map' },
+                                { instansi: 'Pemerintah Kabupaten/Kota', kewenangan: 'Kegiatan non-berusaha dalam satu wilayah Kab/Kota', icon: 'fa-city' },
+                            ].map(item => (
+                                <div key={item.instansi} className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100">
+                                    <i className={`fas ${item.icon} text-blue-500 mt-1`}></i>
+                                    <div>
+                                        <p className="font-bold text-gray-800 text-sm">{item.instansi}</p>
+                                        <p className="text-gray-500 text-sm">{item.kewenangan}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mt-4 bg-blue-100 rounded-xl p-3 text-sm text-blue-800 font-medium">
+                            <i className="fas fa-info-circle mr-2"></i>
+                            <strong>Dinas PUPR Papua Barat Daya</strong> berperan sebagai instansi teknis yang memverifikasi dan memberikan rekomendasi kesesuaian lokasi dengan RTRW Provinsi.
+                        </div>
+                    </div>
+
+                    {/* CTA Buttons */}
+                    <div className="grid md:grid-cols-2 gap-4">
+                        <button
+                            onClick={() => navigate('/permohonan-kkpr')}
+                            className="bg-blue-900 hover:bg-blue-800 text-white px-6 py-4 rounded-2xl font-bold transition-all active:scale-95 shadow-lg flex items-center justify-center gap-3">
+                            <i className="fas fa-file-alt text-yellow-400 text-xl"></i>
+                            <div className="text-left">
+                                <div className="text-base">Ajukan Permohonan KKPR</div>
+                                <div className="text-xs font-normal text-blue-200">Form online 3 langkah</div>
+                            </div>
+                        </button>
+                        <a
+                            href="https://oss.go.id"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-2xl font-bold transition-all active:scale-95 shadow-lg flex items-center justify-center gap-3">
+                            <i className="fas fa-external-link-alt text-green-200 text-xl"></i>
+                            <div className="text-left">
+                                <div className="text-base">Proses via OSS (KKKPR)</div>
+                                <div className="text-xs font-normal text-green-200">Untuk kegiatan berusaha</div>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
                 {/* 4. Layanan Konsultasi */}
                 < section className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-3xl shadow-lg p-8 md:p-12 text-white" >
                     <h2 className="text-3xl font-bold mb-6">

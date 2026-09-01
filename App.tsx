@@ -12,6 +12,7 @@ import AksesJalan from './components/AksesJalan';
 import DataSpasial from './components/DataSpasial';
 import SPM from './components/SPM';
 import LaporTataRuang from './components/LaporTataRuang';
+import PermohonanKKPR from './components/PermohonanKKPR';
 import PertekAir from './components/PertekAir';
 import PBG from './components/PBG';
 import LoginAdmin from './components/LoginAdmin';
@@ -244,6 +245,7 @@ const App: React.FC = () => {
           </Route>
           <Route path="/spm" element={<SPM />} />
           <Route path="/lapor-tata-ruang" element={<LaporTataRuang />} />
+          <Route path="/permohonan-kkpr" element={<PermohonanKKPR />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Footer />
