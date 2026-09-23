@@ -32,6 +32,8 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-bold mb-6 text-yellow-400">Tautan Penting</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
+              <li><Link to="/tentang-website" className="hover:text-white transition-colors">Tentang Website</Link></li>
+              <li><Link to="/kebijakan-privasi" className="hover:text-white transition-colors">Kebijakan Privasi</Link></li>
               <li><Link to="/info-tata-ruang" className="hover:text-white transition-colors">Info Tata Ruang</Link></li>
               <li><Link to="/akses-jalan" className="hover:text-white transition-colors">Akses Jalan</Link></li>
               <li><Link to="/data-spasial" className="hover:text-white transition-colors">Data Spasial</Link></li>
@@ -39,6 +41,17 @@ const Footer: React.FC = () => {
               <li><a href="https://stunting-poverty-insights-main.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Data Strategis</a></li>
               <li><a href="#" className="hover:text-white transition-colors">E-Procurement (LPSE)</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Satu Data PUPR</a></li>
+              <li>
+                <a
+                  href="https://lapor.go.id/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors flex items-center gap-1.5 group"
+                >
+                  <i className="fas fa-bullhorn text-yellow-400 text-xs group-hover:animate-pulse"></i>
+                  <span>Lapor!</span>
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -55,9 +68,13 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center">
                 <i className="fas fa-envelope mr-3 text-yellow-400"></i>
-                <span>info@pupr-pbd.go.id</span>
+                <span>info@pupr.papuabaratdayaprov.go.id</span>
               </li>
             </ul>
+            <div className="mt-6 flex items-center space-x-2 text-xs font-bold text-blue-900 bg-yellow-500 rounded-full px-4 py-2 inline-flex">
+              <i className="fas fa-check-circle"></i>
+              <span>Website Resmi Pemerintah</span>
+            </div>
           </div>
 
           <div>

@@ -17,6 +17,12 @@ const Navbar: React.FC = () => {
     { label: 'Sistem Internal', path: '/admin-sigap', icon: 'fa-shield-halved' },
   ];
 
+  const laporLink = {
+    label: 'Lapor!',
+    href: 'https://lapor.go.id/',
+    external: true,
+  };
+
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,6 +66,16 @@ const Navbar: React.FC = () => {
                 </a>
               )
             ))}
+            {/* Lapor! Link */}
+            <a
+              href={laporLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full font-bold transition-all shadow-md text-sm"
+            >
+              <i className="fas fa-bullhorn text-xs"></i>
+              {laporLink.label}
+            </a>
             <button className="bg-blue-900 text-white px-5 py-2 rounded-full font-bold hover:bg-blue-800 transition-all shadow-md">
               E-Layanan
             </button>
@@ -101,6 +117,17 @@ const Navbar: React.FC = () => {
               </a>
             )
           ))}
+          {/* Lapor! Mobile Link */}
+          <a
+            href={laporLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-2 py-2 text-red-600 hover:text-red-800 font-bold transition-colors"
+          >
+            <i className="fas fa-bullhorn text-sm"></i>
+            {laporLink.label}
+          </a>
           <button className="w-full bg-blue-900 text-white px-5 py-2 rounded-full font-bold hover:bg-blue-800 transition-all shadow-md">
             E-Layanan
           </button>
