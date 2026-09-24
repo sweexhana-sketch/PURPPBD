@@ -5,6 +5,7 @@ import RoadBridgeMatrix from './RoadBridgeMatrix';
 import { sendBlazwaMessage } from '../services/whatsappService';
 import { verifyLocation, formatVerificationResult } from '../services/spatialVerificationClient';
 import { uploadImage, compressImage } from '../services/imageUploadService';
+import { aduanService } from '../services/aduanService';
 
 const AksesJalan: React.FC = () => {
     const navigate = useNavigate();
@@ -230,7 +231,6 @@ ${photoUrl ? `\n*Foto:* Terlampir` : ''}`;
 
             // 6. Save to Supabase
             console.log('Saving to Supabase...');
-            const { aduanService } = await import('../services/aduanService');
             try {
                 await aduanService.tambahAduan({
                     kategori: 'Jalan',

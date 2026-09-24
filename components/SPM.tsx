@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { aduanService } from '../services/aduanService';
 
 const SPM: React.FC = () => {
     const navigate = useNavigate();
@@ -80,7 +81,6 @@ const SPM: React.FC = () => {
         if (kategoriSPM === 'Jalan Terputus Bencana') kategoriBidang = 'Jalan';
 
         try {
-            const { aduanService } = await import('../services/aduanService');
             await aduanService.tambahAduan({
                 kategori: kategoriBidang,
                 lokasi_jalan: 'Belum ditentukan',

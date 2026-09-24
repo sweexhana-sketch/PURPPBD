@@ -162,8 +162,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const msgType   = body.type      || '';
 
         const targetNumber = sender;
-        const FONNTE_API_KEY = process.env.FONNTE_API_KEY || process.env.VITE_FONNTE_API_KEY;
-        const WEB_URL = "https://purppbd.vercel.app/akses-jalan";
+        const FONNTE_API_KEY = process.env.FONNTE_API_KEY;
+        const WEB_URL = (process.env.SITE_URL || "https://purppbd.vercel.app") + "/akses-jalan";
         const MAPS_URL = "https://www.google.com/maps";
 
         console.log('Parsed Data:');

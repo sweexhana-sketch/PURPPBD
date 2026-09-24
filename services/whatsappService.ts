@@ -1,10 +1,10 @@
 /**
  * WhatsApp Service (Fonnte Integration)
- * Solusi untuk mengirim pesan otomatis via REST API Fonnte
+ * 
+ * KEAMANAN: API Key Fonnte TIDAK lagi diambil di browser.
+ * Semua request diteruskan ke Vercel Serverless Function (/api/send-whatsapp)
+ * yang menyimpan API Key di sisi server (environment variable).
  */
-
-const FONNTE_API_KEY = import.meta.env.VITE_FONNTE_API_KEY;
-const FONNTE_ENDPOINT = 'https://api.fonnte.com/send';
 
 export interface FonnteResponse {
     status: boolean;
@@ -13,42 +13,36 @@ export interface FonnteResponse {
 }
 
 /**
- * Mengirim pesan teks via Fonnte API
+ * Mengirim pesan WhatsApp via serverless endpoint /api/send-whatsapp
+ * API Key Fonnte tersimpan aman di server — TIDAK pernah dikirim ke browser.
  * @param to Nomor tujuan (format 628...)
  * @param message Isi pesan
  */
 export async function sendBlazwaMessage(to: string, message: string): Promise<FonnteResponse> {
-    // Note: Nama function tetap sendBlazwaMessage agar tidak merusak import di file lain, 
-    // namun logic sudah bermigrasi ke Fonnte.
-
-    if (!FONNTE_API_KEY || FONNTE_API_KEY.includes('Paste_Kode')) {
-        console.warn('WhatsApp Service: VITE_FONNTE_API_KEY belum diatur di .env');
-        return { status: false, message: 'API Key belum diatur' };
-    }
-
     try {
-        const response = await fetch(FONNTE_ENDPOINT, {
+        const response = await fetch('/api/send-whatsapp', {
             method: 'POST',
             headers: {
-                'Authorization': FONNTE_API_KEY
+                'Content-Type': 'application/json',
             },
-            body: new URLSearchParams({
-                target: to,
-                message: message
-            })
+            body: JSON.stringify({ to, message }),
         });
 
         const data = await response.json();
-        console.log('Fonnte API Response:', data);
+
+        if (!response.ok) {
+            console.error('WhatsApp API error:', data);
+            return { status: false, message: data.message || 'Gagal mengirim pesan' };
+        }
 
         return {
             status: data.status === true,
-            message: data.reason || 'Selesai',
-            data: data
+            message: data.message || 'Selesai',
+            data: data,
         };
     } catch (error) {
-        console.error('Fonnte API Error:', error);
-        return { status: false, message: 'Gagal terhubung ke server Fonnte' };
+        console.error('WhatsApp Service Error:', error);
+        return { status: false, message: 'Gagal terhubung ke server' };
     }
 }
 

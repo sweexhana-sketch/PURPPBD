@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -19,10 +18,14 @@ import LoginAdmin from './components/LoginAdmin';
 import AdminLayout from './components/AdminLayout';
 import DashboardAdminAduan from './components/DashboardAdminAduan';
 import DashboardAdminBerita from './components/DashboardAdminBerita';
+import KebijakanPrivasi from './components/KebijakanPrivasi';
+import TentangWebsite from './components/TentangWebsite';
+import AccessibilityMenu from './components/AccessibilityMenu';
 import { MOCK_NEWS } from './constants';
 import { useState, useEffect } from 'react';
 import RTLHModal from './components/RTLHModal';
 
+// ... (keep NewsSection and HomePage as they are) ...
 const NewsSection: React.FC = () => {
   const [news, setNews] = useState(MOCK_NEWS);
 
@@ -237,6 +240,8 @@ const App: React.FC = () => {
           <Route path="/data-spasial" element={<DataSpasial />} />
           <Route path="/pertek-air" element={<PertekAir />} />
           <Route path="/pbg" element={<PBG />} />
+          <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
+          <Route path="/tentang-website" element={<TentangWebsite />} />
           <Route path="/admin/login" element={<LoginAdmin />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<Navigate to="/admin/aduan" replace />} />
@@ -250,6 +255,7 @@ const App: React.FC = () => {
         </Routes>
         <Footer />
         <GeminiChat />
+        <AccessibilityMenu />
       </div>
     </Router>
   );
