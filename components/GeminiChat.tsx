@@ -439,7 +439,7 @@ const GeminiChat: React.FC = () => {
     },
     {
       id: 'perumahan',
-      nama: 'Bidang Perumahan & Kawasan Permukiman',
+      nama: 'Bidang Perumahan',
       emoji: '🏠',
       keywords: ['rtlh', 'rumah', 'bedah rumah', 'bantuan rumah', 'perumahan', 'pemukiman', 'hunian', 'tidak layak'],
       phone: '6281141902984', // Ganti dengan nomor admin Perumahan

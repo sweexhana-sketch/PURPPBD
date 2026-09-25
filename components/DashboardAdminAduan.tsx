@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { AduanReport } from '../types';
 import { aduanService } from '../services/aduanService';
 import { authService } from '../services/authService';
@@ -22,6 +22,7 @@ const DashboardAdminAduan: React.FC = () => {
             else if (role === 'ADMIN_CIPTA_KARYA') defaultFilter = 'Cipta Karya';
             else if (role === 'ADMIN_PERUMAHAN') defaultFilter = 'Perumahan';
             else if (role === 'ADMIN_TATA_RUANG') defaultFilter = 'Tata Ruang';
+            else if (role === 'ADMIN_SDA') defaultFilter = 'Sumber Daya Air';
             
             setFilterCategory(defaultFilter);
             
@@ -40,7 +41,7 @@ const DashboardAdminAduan: React.FC = () => {
 
     const availableTabs = useMemo(() => {
         if (userRole === 'super_admin' || userRole === 'ADUAN_MANAGER') {
-            return ['Semua', 'Jalan', 'Cipta Karya', 'Perumahan', 'Tata Ruang', 'Permohonan KKPR'];
+            return ['Semua', 'Jalan', 'Cipta Karya', 'Sumber Daya Air', 'Perumahan', 'Tata Ruang', 'Permohonan KKPR'];
         } else if (userRole === 'ADMIN_BINA_MARGA') {
             return ['Jalan'];
         } else if (userRole === 'ADMIN_CIPTA_KARYA') {
@@ -49,8 +50,10 @@ const DashboardAdminAduan: React.FC = () => {
             return ['Perumahan'];
         } else if (userRole === 'ADMIN_TATA_RUANG') {
             return ['Tata Ruang', 'Permohonan KKPR'];
+        } else if (userRole === 'ADMIN_SDA') {
+            return ['Sumber Daya Air'];
         }
-        return ['Semua', 'Jalan', 'Cipta Karya', 'Perumahan', 'Tata Ruang'];
+        return ['Semua', 'Jalan', 'Cipta Karya', 'Sumber Daya Air', 'Perumahan', 'Tata Ruang'];
     }, [userRole]);
 
     const updateReportStatus = async (id: string, newStatus: AduanReport['status']) => {
