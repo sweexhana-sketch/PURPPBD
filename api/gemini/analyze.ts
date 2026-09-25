@@ -1,5 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 
 export const config = {
   api: {
@@ -27,7 +27,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
              return res.status(400).json({ error: 'Invalid image format' });
         }
 
-        // Use GEMINI_API_KEY from Vercel Server Environment
         const API_KEY = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
         
         if (!API_KEY) {
@@ -35,9 +34,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             return res.status(500).json({ error: 'Server configuration error' });
         }
 
-        const ai = new GoogleGenerativeAI(API_KEY);
-        const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
-        
+        // Use new @google/genai SDK (v1 endpoint compatible with new API keys)
+        const ai = new GoogleGenAI({ apiKey: API_KEY });
+
         let locContext = "";
         if (locationData && locationData.latitude && locationData.latitude !== 'Tidak tersedia') {
             locContext = `\n\n📍 DATA LOKASI DARI SISTEM:\n- Koordinat GPS: ${locationData.latitude}, ${locationData.longitude}\n- Jalan Terdekat (WebGIS): ${locationData.roadName || 'Tidak teridentifikasi'}\n- Status Wewenang Jalan: ${locationData.jurisdiction || 'Tidak diketahui'}\n- Status Tata Ruang/Kawasan Hutan (GIS): ${locationData.statusKawasan || 'Tidak diketahui'}`;
@@ -65,21 +64,24 @@ IsValid = false HANYA jika foto tidak relevan (selfie, makanan, dll). Semua foto
         else if (imageBuffer.startsWith('data:image/webp')) mimeType = "image/webp";
         else if (imageBuffer.startsWith('data:image/gif')) mimeType = "image/gif";
 
-        const result = await model.generateContent([
-            prompt,
-            {
-                inlineData: {
-                    data: base64Data,
-                    mimeType: mimeType
+        const result = await ai.models.generateContent({
+            model: 'gemini-3.8-flash',
+            contents: [
+                {
+                    role: 'user',
+                    parts: [
+                        { text: prompt },
+                        { inlineData: { data: base64Data, mimeType: mimeType as any } }
+                    ]
                 }
-            }
-        ]);
-        
-        const text = result.response.text();
+            ]
+        });
+
+        const text = result.text;
 
         return res.status(200).json({ text });
     } catch (error: any) {
-        console.error("Image Analysis Error:", error);
+        console.error("Image Analysis Error:", error?.message || error);
         return res.status(500).json({ error: 'Terjadi gangguan saat menganalisis gambar.' });
     }
 }

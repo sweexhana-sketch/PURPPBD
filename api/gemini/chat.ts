@@ -1,5 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 
 const SYSTEM_INSTRUCTION = `
 # IDENTITAS
@@ -46,54 +46,56 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             return res.status(400).json({ error: 'userMessage is required' });
         }
 
-        // Use GEMINI_API_KEY from Vercel Server Environment
         const API_KEY = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
-        
+
         if (!API_KEY) {
             console.error("Gemini API Key is missing on the server.");
             return res.status(500).json({ error: 'Server configuration error' });
         }
 
-        const ai = new GoogleGenerativeAI(API_KEY);
-        const model = ai.getGenerativeModel({
-            model: 'gemini-2.5-flash',
-            systemInstruction: SYSTEM_INSTRUCTION,
-        });
+        // Use new @google/genai SDK (uses v1 endpoint, compatible with new API keys)
+        const ai = new GoogleGenAI({ apiKey: API_KEY });
 
-        let formattedHistory = history.map((msg: any) => ({
-            role: msg.role === 'ai' ? 'model' : 'user',
-            parts: [{ text: msg.text || '' }],
-        }));
+        // Build chat history from previous messages
+        const formattedHistory = history
+            .filter((msg: any) => msg.text && msg.text.trim().length > 0)
+            .map((msg: any) => ({
+                role: msg.role === 'ai' ? 'model' : 'user',
+                parts: [{ text: msg.text || '' }],
+            }));
 
         // Remove the latest userMessage from history to prevent duplicate
-        if (formattedHistory.length > 0 && 
+        if (
+            formattedHistory.length > 0 &&
             formattedHistory[formattedHistory.length - 1].role === 'user' &&
-            formattedHistory[formattedHistory.length - 1].parts[0].text === userMessage) {
+            formattedHistory[formattedHistory.length - 1].parts[0].text === userMessage
+        ) {
             formattedHistory.pop();
         }
 
         // Gemini history MUST start with a 'user' message
         if (formattedHistory.length > 0 && formattedHistory[0].role === 'model') {
-            // Prepend a dummy user message to satisfy Gemini API constraints
             formattedHistory.unshift({
                 role: 'user',
                 parts: [{ text: 'Halo Asisten Sigap' }]
             });
         }
 
-        const chat = model.startChat({
-            history: formattedHistory,
-            generationConfig: {
+        const chat = ai.chats.create({
+            model: 'gemini-3.8-flash',
+            config: {
+                systemInstruction: SYSTEM_INSTRUCTION,
                 temperature: 0.7,
             },
+            history: formattedHistory,
         });
 
-        const result = await chat.sendMessage(userMessage);
-        const text = await result.response.text();
+        const result = await chat.sendMessage({ message: userMessage });
+        const text = result.text;
 
         return res.status(200).json({ text });
     } catch (error: any) {
-        console.error("Gemini Chat Error:", error);
+        console.error("Gemini Chat Error:", error?.message || error);
         return res.status(500).json({ error: 'Terjadi gangguan pada sistem asisten AI.' });
     }
 }
