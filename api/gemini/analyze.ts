@@ -36,8 +36,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }
 
         const ai = new GoogleGenerativeAI(API_KEY);
-        // gemini-1.5-flash stabil dan mendukung analisis gambar
-        const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
         
         let locContext = "";
         if (locationData && locationData.latitude && locationData.latitude !== 'Tidak tersedia') {
