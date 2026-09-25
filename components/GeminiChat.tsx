@@ -406,9 +406,81 @@ const GeminiChat: React.FC = () => {
     }
   };
 
+  // ============================================================
+  // ROUTING TABLE: Peta laporan → Bidang PUPR yang berwenang
+  // ============================================================
+  const BIDANG_ROUTING = [
+    {
+      id: 'bina_marga',
+      nama: 'Bidang Bina Marga',
+      emoji: '🛣️',
+      keywords: ['jalan', 'rusak', 'lubang', 'longsor', 'jembatan', 'putus', 'retak', 'banjir jalan', 'aspal', 'timbunan'],
+      phone: '6281141902984', // Ganti dengan nomor admin Bina Marga
+      tugas: 'Penanganan jalan rusak, longsor, dan pemeliharaan jembatan',
+      sla: '1×24 jam (Darurat) / 7 hari kerja (Normal)',
+    },
+    {
+      id: 'cipta_karya',
+      nama: 'Bidang Cipta Karya',
+      emoji: '🏗️',
+      keywords: ['pbg', 'izin bangunan', 'imb', 'bangunan', 'gedung', 'konstruksi', 'renovasi', 'izin mendirikan'],
+      phone: '6281141902984', // Ganti dengan nomor admin Cipta Karya
+      tugas: 'Perizinan bangunan (PBG/IMB) dan pengawasan konstruksi',
+      sla: '14 hari kerja',
+    },
+    {
+      id: 'sda',
+      nama: 'Bidang Sumber Daya Air',
+      emoji: '💧',
+      keywords: ['air', 'irigasi', 'sungai', 'banjir', 'pertek', 'drainase', 'saluran', 'bendungan', 'waduk'],
+      phone: '6281141902984', // Ganti dengan nomor admin SDA
+      tugas: 'Rekomendasi teknis air permukaan, irigasi, dan drainase',
+      sla: '7 hari kerja',
+    },
+    {
+      id: 'perumahan',
+      nama: 'Bidang Perumahan & Kawasan Permukiman',
+      emoji: '🏠',
+      keywords: ['rtlh', 'rumah', 'bedah rumah', 'bantuan rumah', 'perumahan', 'pemukiman', 'hunian', 'tidak layak'],
+      phone: '6281141902984', // Ganti dengan nomor admin Perumahan
+      tugas: 'Program bantuan RTLH (Rumah Tidak Layak Huni) dan pemberdayaan permukiman',
+      sla: '30 hari kerja',
+    },
+    {
+      id: 'tata_ruang',
+      nama: 'Bidang Tata Ruang',
+      emoji: '🗺️',
+      keywords: ['tata ruang', 'gis', 'kawasan', 'kkpr', 'peruntukan', 'zonasi', 'peta', 'rtrw'],
+      phone: '6281141902984', // Ganti dengan nomor admin Tata Ruang
+      tugas: 'Kesesuaian kegiatan pemanfaatan ruang (KKPR) dan informasi tata ruang',
+      sla: '14 hari kerja',
+    },
+  ];
+
+  /**
+   * Deteksi bidang yang berwenang berdasarkan isi percakapan dan kategori laporan
+   */
+  const detectBidang = (allMessages: typeof messages, kategori?: string) => {
+    const fullText = allMessages.map(m => m.text).join(' ').toLowerCase();
+    const kategoriLower = (kategori || '').toLowerCase();
+
+    for (const bidang of BIDANG_ROUTING) {
+      for (const keyword of bidang.keywords) {
+        if (fullText.includes(keyword) || kategoriLower.includes(keyword)) {
+          return bidang;
+        }
+      }
+    }
+    // Default fallback → Bina Marga (paling umum)
+    return BIDANG_ROUTING[0];
+  };
+
   const handleSubmitFinal = async () => {
     const isJalanPutus = messages.some(m => m.text.toLowerCase().includes('putus'));
-    const finalDescription = isJalanPutus ? `[PRIORITAS TINGGI] ${complaintData.deskripsi || 'Sesuai Foto'}` : (complaintData.deskripsi || 'Sesuai Foto');
+    const isDarurat = messages.some(m => m.text.toLowerCase().includes('darurat') || m.text.toLowerCase().includes('bencana'));
+    
+    const prioritasLabel = isDarurat ? '[🔴 DARURAT] ' : isJalanPutus ? '[🟠 PRIORITAS TINGGI] ' : '';
+    const finalDescription = `${prioritasLabel}${complaintData.deskripsi || 'Sesuai Foto'}`;
 
     const finalReport = {
       ...complaintData,
@@ -417,35 +489,47 @@ const GeminiChat: React.FC = () => {
       source: 'Asisten Sigap'
     };
 
-    // Construct WhatsApp Message
-    const phoneNumber = '6281141902984';
+    // ── Deteksi bidang yang berwenang ──
+    const bidang = detectBidang(messages, (finalReport as any).kategoriLaporan);
+
+    const reportId = `PBD-${Date.now().toString().slice(-6)}`;
     const statusJalan = finalReport.jurisdiction === 'Provinsi' ? '🔴 JALAN PROVINSI' : (finalReport.jurisdiction === 'Nasional' ? '🔵 JALAN NASIONAL' : '⚪ LUAR JARINGAN');
     const statusKawasan = (finalReport as any).status_kawasan ? `🗺️ *Status Kawasan:* ${(finalReport as any).status_kawasan}` : '';
 
-    const message = `Halo Dinas PUPR Papua Barat Daya, berikut laporan baru dari Asisten Sigap:
-    
+    // ── Pesan WhatsApp untuk Admin Bidang ──
+    const adminMessage =
+`🔔 *LAPORAN BARU — ASISTEN SIGAP*
+${bidang.emoji} *Diteruskan ke:* ${bidang.nama}
+━━━━━━━━━━━━━━━━━━━━━
+📦 *No. Laporan:* ${reportId}
+⏰ *Waktu:* ${new Date().toLocaleString('id-ID')}
+━━━━━━━━━━━━━━━━━━━━━
 *STATUS WEWENANG:* ${statusJalan}
 ${statusKawasan}
-📌 *Lokasi Terdekat:* ${finalReport.lokasi_jalan || 'Tidak terdeteksi'}
-📍 *Koordinat GPS:* ${finalReport.latitude}, ${finalReport.longitude}
+📌 *Lokasi:* ${finalReport.lokasi_jalan || 'Tidak terdeteksi'}
+📍 *Koordinat GPS:* ${finalReport.latitude || '-'}, ${finalReport.longitude || '-'}
 
-*--- HASIL ANALISIS AI ---*
+*📋 DESKRIPSI LAPORAN:*
 ${finalReport.deskripsi}
+━━━━━━━━━━━━━━━━━━━━━
+🏢 *Bidang:* ${bidang.nama}
+📋 *Tugas:* ${bidang.tugas}
+⏳ *SLA Penanganan:* ${bidang.sla}
+━━━━━━━━━━━━━━━━━━━━━
+_Laporan ini dikirim otomatis oleh Asisten Sigap Dinas PUPR Papua Barat Daya._`;
 
-📦 *Data ID:* PBD-${Math.floor(Math.random() * 10000)}`;
+    const encodedMessage = encodeURIComponent(adminMessage);
+    const whatsappUrl = `https://wa.me/${bidang.phone}?text=${encodedMessage}`;
 
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-    const reportId = `PBD-${Math.floor(Math.random() * 10000)}`;
     const finalReportFinal = {
       ...finalReport,
-      kategori: 'Jalan',
+      kategori: bidang.id === 'bina_marga' ? 'Jalan' : bidang.nama.replace('Bidang ', ''),
       status: 'Baru' as const
     };
 
     setIsLoading(true);
-    // Save to Supabase for Admin Dashboard
+
+    // ── Simpan ke Supabase ──
     try {
       const payload = { ...finalReportFinal };
       delete (payload as any).timestamp;
@@ -455,52 +539,67 @@ ${finalReport.deskripsi}
       console.error("Gagal menyimpan aduan:", e);
     }
 
-    // Kirim data ke n8n (di-trigger secara background)
-    await sendToN8nWebhook(finalReportFinal);
+    // ── Kirim ke n8n (background) ──
+    await sendToN8nWebhook({ ...finalReportFinal, bidang_tujuan: bidang.nama });
+
     setIsLoading(false);
 
-    // Add Digital Receipt to Chat
+    // ── Resi Digital ──
     setMessages(prev => [...prev, {
       role: 'ai',
-      text: 'Berikut adalah Resi Digital laporan Bapa/Mama:',
+      text: `✅ Laporan berhasil diteruskan ke **${bidang.nama}**!\n\nBerikut resi digital laporan Bapa/Mama:`,
       type: 'receipt',
       receiptData: {
         id: reportId,
         roadName: finalReport.lokasi_jalan || 'Tidak Terdeteksi',
-        jurisdiction: finalReport.jurisdiction || 'Luar Jaringan',
-        coordinates: `${finalReport.latitude}, ${finalReport.longitude}`,
+        jurisdiction: `${bidang.emoji} ${bidang.nama}`,
+        coordinates: `${finalReport.latitude || '-'}, ${finalReport.longitude || '-'}`,
         timestamp: new Date().toLocaleString('id-ID')
       }
     }]);
 
-    // Simulated Admin Auto-Reply based on Jurisdiction
+    // ── Balasan otomatis dari Admin Bidang (simulasi) ──
     setTimeout(() => {
-      let adminText = '';
-      if (finalReport.jurisdiction === 'Provinsi') {
-        adminText = '📢 **BALASAN OTOMATIS ADMIN PUPR PBD**:\n\nLaporan diterima. Status jalan adalah **Kewenangan Provinsi**. Laporan Kaka akan segera kami proses untuk penanganan lebih lanjut. Terima kasih!';
-      } else {
-        adminText = '📢 **BALASAN OTOMATIS ADMIN PUPR PBD**:\n\nLaporan diterima. Status jalan **bukan kewenangan Provinsi**. Kami akan menampung laporan ini untuk tetap diteruskan ke instansi yang berwenang (Balai Jalan/Kabupaten). Terima kasih!';
-      }
+      const adminAutoReply =
+`📢 **BALASAN OTOMATIS — ${bidang.nama.toUpperCase()}**
+
+${bidang.emoji} Laporan **#${reportId}** sudah kami terima dengan baik.
+
+📋 **Ringkasan Laporan:**
+• Lokasi: ${finalReport.lokasi_jalan || 'GPS tercatat'}
+• Status Jalan: ${finalReport.jurisdiction || 'Diverifikasi'}
+• Diteruskan ke: ${bidang.nama}
+
+⏳ **Estimasi Tindak Lanjut:** ${bidang.sla}
+
+${isDarurat ? '🚨 **STATUS DARURAT TERDETEKSI** — Tim lapangan akan segera dikerahkan!\n\n' : ''}Laporan Kaka/Abang akan diprioritaskan sesuai urgensi. Kami akan menghubungi Kakak jika dibutuhkan informasi tambahan.
+
+*Salam dari ${bidang.nama}*
+*Dinas PUPR Provinsi Papua Barat Daya* 🦅`;
 
       setMessages(prev => [...prev, {
         role: 'admin',
-        text: adminText
+        text: adminAutoReply
       }]);
-    }, 1500);
+    }, 2000);
 
-    // Send automated WhatsApp notification (BlazWA Integration)
-    const waResponse = await sendBlazwaMessage(phoneNumber, message);
+    // ── Kirim notifikasi WhatsApp ke Admin Bidang ──
+    const waResponse = await sendBlazwaMessage(bidang.phone, adminMessage);
     if (waResponse.status) {
-      console.log('BlazWA: Notifikasi otomatis berhasil dikirim');
+      console.log(`Notifikasi WhatsApp berhasil dikirim ke ${bidang.nama}`);
     }
 
+    // Buka WhatsApp langsung
     window.open(whatsappUrl, '_blank');
 
-    setMessages(prev => [...prev, {
-      role: 'ai',
-      text: 'Laporan sudah diteruskan ke WhatsApp Dinas PUPR. Ada lagi yang PACE MACE mau laporkan?'
-    }]);
+    setTimeout(() => {
+      setMessages(prev => [...prev, {
+        role: 'ai',
+        text: `Laporan sudah diteruskan langsung ke ${bidang.emoji} **${bidang.nama}**! Ada lagi yang Pace/Mace mau laporkan atau tanyakan?`
+      }]);
+    }, 4000);
   };
+
 
   return (
     <>
